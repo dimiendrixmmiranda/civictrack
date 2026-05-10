@@ -1,0 +1,100 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --azul-escuro: #071422;
+  --azul-claro: #105BD8;
+  --verde: #23A150;
+  --verde-claro: #139B70;
+  --branco: #ECF0F6;
+  --cinza: #0C1724;
+
+}
+
+@theme {
+  --breakpoint-sm: 425px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1440px;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Cores */
+  --color-azul-escuro: var(--azul-escuro);
+  --color-azul-claro: var(--azul-claro);
+  --color-verde: var(--verde);
+  --color-verde-claro: var(--verde-claro);
+  --color-branco: var(--branco);
+  --color-cinza: var(--cinza);
+
+  /* Fonts */
+  --font-bebas: var(--font-bebas);
+  --font-inter: var(--font-inter);
+  --font-poppins: var(--font-poppins);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-poppins);
+}
+
+button {
+  cursor: pointer;
+}
+
+.barraSpan {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+/* SCROLLBAR */
+
+.barraSpan::-webkit-scrollbar {
+    height: 6px;
+}
+
+.barraSpan::-webkit-scrollbar-track {
+    background: #3f3f46;
+}
+
+.barraSpan::-webkit-scrollbar-thumb {
+    background: var(--verde-claro);
+    border-radius: 9999px;
+}
+
+/* Barra tabela */
+.barraTabela {
+    overflow-x: auto;
+}
+
+.barraTabela::-webkit-scrollbar {
+    height: 6px;
+}
+
+.barraTabela::-webkit-scrollbar-track {
+    background: #27272a;
+    border-radius: 9999px;
+}
+
+.barraTabela::-webkit-scrollbar-thumb {
+    background: var(--verde);
+    border-radius: 9999px;
+}

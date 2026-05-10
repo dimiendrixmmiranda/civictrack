@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  user
+  admin
+}
+
+model User {
+  id         String   @id @default(uuid())
+  name       String?
+  email      String   @unique
+  password   String
+
+  role       Role     @default(user)
+
+  sexo       Sexo
+  telefone   String
+  imagem     String
+
+  endereco   Endereco? @relation(fields: [enderecoId], references: [id])
+  enderecoId String?   @unique
+
+  denuncias  Denuncia[]
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+model Endereco {
+  id          String  @id @default(uuid())
+
+  rua         String
+  numero      String
+  bairro      String
+  complemento String?
+
+  latitude    Float
+  longitude   Float
+
+  user User?
+  denuncias   Denuncia[]
+
+}
+
+enum Sexo {
+  masculino
+  feminino
+  nao_informado
+}
+
+model Denuncia {
+  id               String   @id @default(uuid())
+
+  categoria        String
+  tipoDoProblema   String
+  risco            String
+  prioridade       String
+  imagem           String?
+  custo            String?
+
+  status           String   @default("aberto")
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  userId           String
+  user             User @relation(fields: [userId], references: [id])
+
+  enderecoId       String
+  endereco         Endereco @relation(fields: [enderecoId], references: [id])
+}
