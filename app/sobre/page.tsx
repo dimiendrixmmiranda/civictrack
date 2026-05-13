@@ -1,7 +1,7 @@
 import CarrosselTecnologico from "@/components/sobre/CarrosselTecnologico";
 import Template from "@/components/template/Template";
 import Image from "next/image";
-import { FaCode, FaStar, FaTools } from "react-icons/fa";
+import { FaCode, FaEye, FaHeart, FaStar, FaTools } from "react-icons/fa";
 import { FiTarget } from "react-icons/fi";
 import { TbTargetArrow } from "react-icons/tb";
 
@@ -43,18 +43,33 @@ export default function Page() {
                             </p>
                         </div>
                         <div className="flex flex-col justify-center items-center bg-azul-escuro p-4 max-w-[350px] mx-auto max-h-[340px] rounded-lg h-full my-auto">
-                            <TbTargetArrow className="text-8xl" />
-                            <h3 className="font-bebas text-4xl">Missão</h3>
+                            <FaEye className="text-8xl" />
+                            <h3 className="font-bebas text-4xl">Visão</h3>
                             <p className="text-center text-sm">
-                                Promover cidades mais seguras, organizadas e transparentes através da tecnologia e da participação cidadã.
+                                Ser referência nacional em soluções tecnológicas para gestão de problemas urbanos e inteligência cidadã.
                             </p>
                         </div>
-                        <div className="flex flex-col justify-center items-center bg-azul-escuro p-4 max-w-[350px] mx-auto max-h-[340px] rounded-lg h-full my-auto">
-                            <TbTargetArrow className="text-8xl" />
-                            <h3 className="font-bebas text-4xl">Missão</h3>
-                            <p className="text-center text-sm">
-                                Promover cidades mais seguras, organizadas e transparentes através da tecnologia e da participação cidadã.
-                            </p>
+                        <div className="flex flex-col justify-center items-center bg-azul-escuro p-4 max-w-[350px] w-full mx-auto max-h-[340px] rounded-lg h-full my-auto">
+                            <FaHeart className="text-8xl" />
+                            <h3 className="font-bebas text-4xl">Valores</h3>
+                            <ul>
+                                <li className="flex items-center gap-1">
+                                    <div className="w-3 h-3 rounded-full bg-verde"></div>
+                                    <p>Transparência</p>
+                                </li>
+                                <li className="flex items-center gap-1">
+                                    <div className="w-3 h-3 rounded-full bg-verde"></div>
+                                    <p>Participação Cidadã</p>
+                                </li>
+                                <li className="flex items-center gap-1">
+                                    <div className="w-3 h-3 rounded-full bg-verde"></div>
+                                    <p>Inovação</p>
+                                </li>
+                                <li className="flex items-center gap-1">
+                                    <div className="w-3 h-3 rounded-full bg-verde"></div>
+                                    <p>Compromisso Social</p>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div className="xl:col-start-1 xl:col-end-3">
@@ -107,7 +122,7 @@ export default function Page() {
                                     <div className="bg-cinza p-4 rounded-md flex flex-col gap-3 w-fit">
                                         <div className="flex items-center gap-1 text-xl">
                                             <div className="w-4 h-4 bg-yellow-500 rounded-full"></div>
-                                            <h4><b className="text-yellow-500">1.Core</b> (Essencial)</h4>
+                                            <h4><b className="text-yellow-500">2.Intermediário</b></h4>
                                         </div>
                                         <ul>
                                             <li className="flex items-center gap-1">
@@ -143,7 +158,7 @@ export default function Page() {
                                     <div className="bg-cinza p-4 rounded-md flex flex-col gap-3 w-fit">
                                         <div className="flex items-center gap-1 text-xl">
                                             <div className="w-4 h-4 bg-red-500 rounded-full"></div>
-                                            <h4><b className="text-red-500">1.Core</b> (Essencial)</h4>
+                                            <h4><b className="text-red-500">3.Avançado</b></h4>
                                         </div>
                                         <ul>
                                             <li className="flex items-center gap-1">
@@ -179,7 +194,7 @@ export default function Page() {
                                     <div className="bg-cinza p-4 rounded-md flex flex-col gap-3 w-fit">
                                         <div className="flex items-center gap-1 text-xl">
                                             <div className="w-4 h-4 bg-violet-500 rounded-full"></div>
-                                            <h4><b className="text-violet-500">1.Core</b> (Essencial)</h4>
+                                            <h4><b className="text-violet-500">4.Diferenciais</b></h4>
                                         </div>
                                         <ul>
                                             <li className="flex items-center gap-1">
