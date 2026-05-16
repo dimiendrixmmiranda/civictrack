@@ -56,28 +56,28 @@ export default function Home() {
                     </div>
                     <div>
                         <ul className="flex flex-col gap-2 justify-center items-center mt-4 md:grid md:grid-cols-3">
-                            <li className="grid grid-cols-[30px_1fr] gap-2 p-2 bg-cinza rounded-xl max-w-[350px]">
+                            <li className="grid grid-cols-[30px_1fr] gap-2 p-2 bg-cinza rounded-xl max-w-[350px] h-full">
                                 <div className="w-[30px] h-[30px] my-auto flex justify-center items-center bg-blue-700 rounded-full p-1">
                                     <FaEye className="text-3xl" />
                                 </div>
-                                <div className="flex flex-col">
-                                    <span className="text-sm font-bold leading-5">Classificação Inteligente</span>
+                                <div className="flex flex-col my-auto">
+                                    <span className="text-base leading-5 font-bebas">Classificação Inteligente</span>
                                 </div>
                             </li>
-                            <li className="grid grid-cols-[30px_1fr] gap-2 p-2 bg-cinza rounded-xl max-w-[350px]">
+                            <li className="grid grid-cols-[30px_1fr] gap-2 p-2 bg-cinza rounded-xl max-w-[350px] h-full">
                                 <div className="w-[30px] h-[30px] my-auto flex justify-center items-center bg-yellow-700 rounded-full p-1">
                                     <TbChartInfographic className="text-3xl" />
                                 </div>
-                                <div className="flex flex-col">
-                                    <span className="text-sm font-bold leading-5">Priorização Automática</span>
+                                <div className="flex flex-col my-auto">
+                                    <span className="text-base leading-5 font-bebas">Priorização Automática</span>
                                 </div>
                             </li>
-                            <li className="grid grid-cols-[30px_1fr] gap-2 p-2 bg-cinza rounded-xl max-w-[350px]">
+                            <li className="grid grid-cols-[30px_1fr] gap-2 p-2 bg-cinza rounded-xl max-w-[350px] h-full">
                                 <div className="w-[30px] h-[30px] my-auto flex justify-center items-center bg-green-700 rounded-full p-1">
                                     <IoShieldCheckmark className="text-3xl" />
                                 </div>
-                                <div className="flex flex-col">
-                                    <span className="text-sm font-bold leading-5">Transparência Total</span>
+                                <div className="flex flex-col my-auto">
+                                    <span className="text-base leading-5 font-bebas">Transparência Total</span>
                                 </div>
                             </li>
                         </ul>

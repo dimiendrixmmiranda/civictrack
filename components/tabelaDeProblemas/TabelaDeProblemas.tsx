@@ -15,7 +15,7 @@ export default function TabelaDeProblemas({ denuncias, qtdeDeLinhas, altura }: T
 
     return (
         <section className="bg-black col-start-1 col-end-2">
-            <div className="bg-cinza p-4 flex flex-col gap-4">
+            <div className="bg-cinza p-4 flex flex-col gap-4 rounded-xl overflow-hidden">
                 <div className="flex justify-between items-center">
                     <h2 className="font-bebas text-2xl">Problemas recentes</h2>
                     <Link href={'/'} className="flex items-center gap-1 bg-azul-escuro p-1 rounded-full md:py-2 md:px-4">
@@ -30,14 +30,14 @@ export default function TabelaDeProblemas({ denuncias, qtdeDeLinhas, altura }: T
                         denuncias.length > 0 ? (
                             <div className="flex flex-col min-w-[1000px]">
                                 <div className="
-                            grid
-                            grid-cols-[40px_minmax(0,1fr)_80px]
-                            lg:grid-cols-[40px_minmax(0,1fr)_130px_130px_130px_130px_130px]
-                            gap-3
-                            border-y-2
-                            border-cinza-2
-                            py-2
-                        ">
+                                    grid
+                                    grid-cols-[40px_minmax(0,1fr)_80px]
+                                    lg:grid-cols-[40px_minmax(0,1fr)_130px_130px_130px_130px_130px]
+                                    gap-3
+                                    border-y-2
+                                    border-cinza-2
+                                    py-2
+                                ">
                                     <div></div>
                                     <div className="truncate">
                                         Problema
