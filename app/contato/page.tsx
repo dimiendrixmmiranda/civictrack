@@ -20,11 +20,11 @@ export default function Page() {
     const [mensagem, setMensagem] = useState('')
 
     useEffect(() => {
-        if(user){
+        if (user) {
             setNome(user.name)
             setEmail(user.email)
         }
-    },[user])
+    }, [user])
 
     return (
         <Template>
@@ -118,18 +118,34 @@ export default function Page() {
                     <div className="bg-cinza p-6 rounded-xl py-10 flex flex-col gap-4 xl:p-10">
                         <h3 className="font-bebas text-4xl">Envie sua mensagem</h3>
                         <form className="flex flex-col gap-4 h-full" action="https://formsubmit.co/dimiendrixmmiranda@gmail.com" method="POST">
+                            <input type="hidden" name="_captcha" value="false" />
+                            <input
+                                type="hidden"
+                                name="_next"
+                                value="http://localhost:3000/contato/sucesso"
+                            />
                             <div className="flex flex-col xl:grid xl:grid-cols-2 xl:gap-x-4">
-                                <input type="text" name="nome" id="nome" className="bg-zinc-800 p-2 rounded-md" value={nome} onChange={(e) => setNome(e.target.value)} placeholder="Nome completo..." />
-                                <input type="email" name="email" id="email" className="bg-zinc-800 p-2 rounded-md" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
+                                <input type="text" name="nome" id="nome" className="bg-cinza-2 p-2 rounded-md" value={nome} onChange={(e) => setNome(e.target.value)} placeholder="Nome completo..." />
+                                <input type="email" name="email" id="email" className="bg-cinza-2 p-2 rounded-md" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
                             </div>
-                            <input type="text" name="assunto" id="assunto" className="bg-zinc-800 p-2 rounded-md" value={assunto} onChange={(e) => setAssunto(e.target.value)} placeholder="Assunto" />
-                            <textarea name="mensagem" id="mensagem" className="w-full flex-1 bg-zinc-800 rounded-md p-4"value={mensagem} onChange={(e) => setMensagem(e.target.value)} placeholder="Sua mensagem..."></textarea>
-                            <button className="bg-verde flex items-center justify-center gap-2 text-4xl py-2 pt-3 rounded-xl">
+                            <input type="text" name="assunto" id="assunto" className="bg-cinza-2 p-2 rounded-md" value={assunto} onChange={(e) => setAssunto(e.target.value)} placeholder="Assunto" />
+                            <textarea
+                                name="mensagem"
+                                id="mensagem"
+                                className="w-full flex-1 bg-cinza-2 rounded-md p-4"
+                                value={mensagem}
+                                onChange={(e) => setMensagem(e.target.value)}
+                                placeholder="Sua mensagem..."
+                            ></textarea>
+                            <button
+                                type="submit"
+                                className="bg-verde flex items-center justify-center gap-2 text-4xl py-2 pt-3 rounded-xl"
+                            >
                                 <div>
                                     <BsFillSendFill />
                                 </div>
                                 <div>
-                                    <p className="font-bebas" style={{textShadow: '1px 1px 2px black'}}>Enviar mensagem</p>
+                                    <p className="font-bebas" style={{ textShadow: '1px 1px 2px black' }}>Enviar mensagem</p>
                                 </div>
                             </button>
                             <span className="flex items-center gap-1 text-center text-lg justify-center">

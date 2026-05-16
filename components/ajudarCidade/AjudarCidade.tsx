@@ -3,7 +3,7 @@ import { GrMapLocation } from "react-icons/gr";
 
 export default function AjudarCidade() {
     return (
-        <section className="col-span-3 p-4">
+        <section className="col-span-2 p-4 bg-cinza rounded-xl">
             <div className="flex p-4 gap-4 md:grid md:grid-cols-[60px_1fr_140px] lg:grid-cols-[60px_1fr_270px]">
                 <div className="text-6xl">
                     <GrMapLocation />

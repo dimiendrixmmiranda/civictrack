@@ -69,7 +69,7 @@ export default function Dados() {
                         </div>
                     </div>
                 </li>
-                <li className="flex justify-center">
+                <li className="flex justify-center w-full">
                     <div className="bg-azul-escuro p-3 flex gap-2 rounded-xl w-full">
                         <div className="w-15 h-15 bg-red-600 flex justify-center items-center rounded-2xl">
                             <FaExclamationTriangle className="text-4xl" />
@@ -83,7 +83,7 @@ export default function Dados() {
                         </div>
                     </div>
                 </li>
-                <li className="flex justify-center">
+                <li className="flex justify-center w-full">
                     <div className="bg-azul-escuro p-3 flex gap-2 rounded-xl w-full">
                         <div className="w-15 h-15 bg-green-600 flex justify-center items-center rounded-2xl">
                             <FaCheckDouble className="text-4xl" />
@@ -97,13 +97,13 @@ export default function Dados() {
                         </div>
                     </div>
                 </li>
-                <li className="flex justify-center">
+                <li className="flex justify-center w-full">
                     <div className="bg-azul-escuro p-3 flex gap-2 rounded-xl w-full">
                         <div className="w-15 h-15 bg-purple-600 flex justify-center items-center rounded-2xl">
                             <RiMoneyDollarCircleFill className="text-4xl" />
                         </div>
                         <div className="flex flex-col">
-                            <span className="font-bebas text-lg leading-6">Custo Estimado Total</span>
+                            <span className="font-bebas text-2xl leading-6">Custo Estimado Total</span>
                             <p className="text-2xl mt-auto font-bold">R${precoDasDenunciasResolvidas.toFixed(2) || '0,00'}</p>
                         </div>
                     </div>

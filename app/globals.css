@@ -9,8 +9,8 @@
   --verde: #23A150;
   --verde-claro: #139B70;
   --branco: #ECF0F6;
-  --cinza: #0C1724;
-
+  --cinza: #132235;
+  --cinza-2: #051222;
 }
 
 @theme {
@@ -34,6 +34,7 @@
   --color-verde-claro: var(--verde-claro);
   --color-branco: var(--branco);
   --color-cinza: var(--cinza);
+  --color-cinza-2: var(--cinza-2);
 
   /* Fonts */
   --font-bebas: var(--font-bebas);
@@ -95,6 +96,24 @@ button {
 }
 
 .barraTabela::-webkit-scrollbar-thumb {
+    background: var(--verde);
+    border-radius: 9999px;
+}
+.barra {
+    overflow-x: auto;
+}
+
+.barra::-webkit-scrollbar {
+    height: 2px;
+    width: 4px;
+}
+
+.barra::-webkit-scrollbar-track {
+    background: #27272a;
+    border-radius: 9999px;
+}
+
+.barra::-webkit-scrollbar-thumb {
     background: var(--verde);
     border-radius: 9999px;
 }

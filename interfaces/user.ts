@@ -4,6 +4,7 @@ export type Role = "user" | "admin"
 
 export default interface User {
     id: string
+    imagem: string,
     name: string
     email: string
     createdAt: Date

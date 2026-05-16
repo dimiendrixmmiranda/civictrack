@@ -33,7 +33,7 @@ export async function POST(req: Request) {
                 name,
                 email,
                 password: hashedPassword,
-                imagem: imagem || "",
+                imagem: imagem || `${sexo === 'masculino' ? '/sexo/masculino.png': '/sexo/feminino.png'}`,
                 sexo,
                 telefone,
 
@@ -108,6 +108,7 @@ export async function GET() {
             name: user.name,
             email: user.email,
             role: user.role,
+            imagem: user.imagem,
             endereco: user.endereco,
             createdAt: user.createdAt,
             updatedAt: user.updatedAt,

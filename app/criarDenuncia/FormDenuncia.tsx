@@ -42,7 +42,7 @@ const problemasPorCategoria = {
         "Vazamento"
     ],
 
-    segurança: [
+    seguranca: [
         "Semáforo quebrado",
         "Via perigosa",
         "Falta de sinalização"
@@ -64,7 +64,7 @@ const iconesCategoria = {
 
     drenagem: "/leaflet/alagamento.png",
 
-    segurança: "/leaflet/seguranca.png",
+    seguranca: "/leaflet/seguranca.png",
 
     outro: "/leaflet/pino.png",
 }
@@ -237,7 +237,7 @@ export default function FormDenuncia() {
                         Drenagem
                     </option>
 
-                    <option value="segurança">
+                    <option value="seguranca">
                         Segurança
                     </option>
 

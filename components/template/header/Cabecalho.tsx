@@ -205,7 +205,7 @@ export default function Cabecalho() {
                                     Bem vindo
                                 </span>
 
-                                <h2 className="font-bold text-center leading-5">
+                                <h2 className="font-bold text-center leading-5 capitalize">
                                     {user.name?.split(" ")[0]}
                                 </h2>
                             </div>

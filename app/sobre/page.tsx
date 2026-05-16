@@ -2,7 +2,7 @@ import CarrosselTecnologico from "@/components/sobre/CarrosselTecnologico";
 import Template from "@/components/template/Template";
 import Image from "next/image";
 import { FaCode, FaEye, FaHeart, FaStar, FaTools } from "react-icons/fa";
-import { FiTarget } from "react-icons/fi";
+import { FiActivity, FiAlertTriangle, FiAward, FiBarChart2, FiBell, FiCheckSquare, FiClipboard, FiClock, FiCpu, FiCreditCard, FiDollarSign, FiFileText, FiGlobe, FiMap, FiMapPin, FiPieChart, FiSearch, FiShield, FiTarget, FiTrendingUp, FiUsers } from "react-icons/fi";
 import { TbTargetArrow } from "react-icons/tb";
 
 export default function Page() {
@@ -52,7 +52,7 @@ export default function Page() {
                         <div className="flex flex-col justify-center items-center bg-azul-escuro p-4 max-w-[350px] w-full mx-auto max-h-[340px] rounded-lg h-full my-auto">
                             <FaHeart className="text-8xl" />
                             <h3 className="font-bebas text-4xl">Valores</h3>
-                            <ul>
+                            <ul className="text-sm flex flex-col gap-1">
                                 <li className="flex items-center gap-1">
                                     <div className="w-3 h-3 rounded-full bg-verde"></div>
                                     <p>Transparência</p>
@@ -88,26 +88,30 @@ export default function Page() {
                                             <div className="w-4 h-4 bg-verde rounded-full"></div>
                                             <h4><b className="text-verde">1.Core</b> (Essencial)</h4>
                                         </div>
-                                        <ul>
+                                        <ul className="flex-1 flex flex-col gap-1">
                                             <li className="flex items-center gap-1">
-                                                <FiTarget className="text-verde" />
+                                                <FiClipboard className="text-verde" />
                                                 <p>Gestão completa de problemas (CRUD)</p>
                                             </li>
+
                                             <li className="flex items-center gap-1">
-                                                <FiTarget className="text-verde" />
-                                                <p>Gestão completa de problemas (CRUD)</p>
+                                                <FiAlertTriangle className="text-verde" />
+                                                <p>Classificação inteligente (risco e gravidade)</p>
                                             </li>
+
                                             <li className="flex items-center gap-1">
-                                                <FiTarget className="text-verde" />
-                                                <p>Gestão completa de problemas (CRUD)</p>
+                                                <FiDollarSign className="text-verde" />
+                                                <p>Estimativa de custo por categoria</p>
                                             </li>
+
                                             <li className="flex items-center gap-1">
-                                                <FiTarget className="text-verde" />
-                                                <p>Gestão completa de problemas (CRUD)</p>
+                                                <FiTrendingUp className="text-verde" />
+                                                <p>Priorização automática baseada em score</p>
                                             </li>
+
                                             <li className="flex items-center gap-1">
-                                                <FiTarget className="text-verde" />
-                                                <p>Gestão completa de problemas (CRUD)</p>
+                                                <FiBarChart2 className="text-verde" />
+                                                <p>Dashboard com métricas essenciais</p>
                                             </li>
                                         </ul>
                                         <div className="bg-green-800/40 rounded-xl p-2 grid grid-cols-[40px_1fr] gap-2 max-w-[380px]">
@@ -119,74 +123,82 @@ export default function Page() {
                                     </div>
                                 </div>
                                 <div>
-                                    <div className="bg-cinza p-4 rounded-md flex flex-col gap-3 w-fit">
+                                    <div className="bg-cinza p-4 rounded-md flex flex-col gap-3 w-fit h-full">
                                         <div className="flex items-center gap-1 text-xl">
                                             <div className="w-4 h-4 bg-yellow-500 rounded-full"></div>
                                             <h4><b className="text-yellow-500">2.Intermediário</b></h4>
                                         </div>
-                                        <ul>
+                                        <ul className="flex-1 flex flex-col gap-1">
                                             <li className="flex items-center gap-1">
-                                                <FiTarget className="text-yellow-500" />
-                                                <p>Gestão completa de problemas (CRUD)</p>
+                                                <FiUsers className="text-yellow-500" />
+                                                <p>Sistema de usuários (cadastro, login)</p>
                                             </li>
+
                                             <li className="flex items-center gap-1">
-                                                <FiTarget className="text-yellow-500" />
-                                                <p>Gestão completa de problemas (CRUD)</p>
+                                                <FiMapPin className="text-yellow-500" />
+                                                <p>Localização com mapa e coordenadas</p>
                                             </li>
+
                                             <li className="flex items-center gap-1">
-                                                <FiTarget className="text-yellow-500" />
-                                                <p>Gestão completa de problemas (CRUD)</p>
+                                                <FiSearch className="text-yellow-500" />
+                                                <p>Filtros e busca avançada</p>
                                             </li>
+
                                             <li className="flex items-center gap-1">
-                                                <FiTarget className="text-yellow-500" />
-                                                <p>Gestão completa de problemas (CRUD)</p>
+                                                <FiActivity className="text-yellow-500" />
+                                                <p>Status do problema (aberto, andamento, resolvido)</p>
                                             </li>
+
                                             <li className="flex items-center gap-1">
-                                                <FiTarget className="text-yellow-500" />
-                                                <p>Gestão completa de problemas (CRUD)</p>
+                                                <FiPieChart className="text-yellow-500" />
+                                                <p>Dashboard interativo e gráficos</p>
                                             </li>
                                         </ul>
                                         <div className="bg-yellow-500/40 rounded-xl p-2 grid grid-cols-[40px_1fr] gap-2 max-w-[380px]">
                                             <div className="w-10 h-10 bg-yellow-500 flex justify-center items-center rounded-xl my-auto">
                                                 <FaStar />
                                             </div>
-                                            <p className="leading-5 text-sm">Base sólida para qualquer cidade começar a organizar seus problemas urbanos</p>
+                                            <p className="leading-5 text-sm">Recursos que trazem mais controle, usabilidade e inteligência para a gestão.</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div>
-                                    <div className="bg-cinza p-4 rounded-md flex flex-col gap-3 w-fit">
+                                    <div className="bg-cinza p-4 rounded-md flex flex-col gap-3 w-fit h-full">
                                         <div className="flex items-center gap-1 text-xl">
                                             <div className="w-4 h-4 bg-red-500 rounded-full"></div>
                                             <h4><b className="text-red-500">3.Avançado</b></h4>
                                         </div>
-                                        <ul>
+                                        <ul className="flex-1 flex flex-col gap-1">
                                             <li className="flex items-center gap-1">
-                                                <FiTarget className="text-red-500" />
-                                                <p>Gestão completa de problemas (CRUD)</p>
+                                                <FiMap className="text-red-500" />
+                                                <p>Integração com mapa interativo</p>
                                             </li>
+
                                             <li className="flex items-center gap-1">
-                                                <FiTarget className="text-red-500" />
-                                                <p>Gestão completa de problemas (CRUD)</p>
+                                                <FiBell className="text-red-500" />
+                                                <p>Notificações inteligentes</p>
                                             </li>
+
                                             <li className="flex items-center gap-1">
-                                                <FiTarget className="text-red-500" />
-                                                <p>Gestão completa de problemas (CRUD)</p>
+                                                <FiClock className="text-red-500" />
+                                                <p>Histórico e auditoria de alterações</p>
                                             </li>
+
                                             <li className="flex items-center gap-1">
-                                                <FiTarget className="text-red-500" />
-                                                <p>Gestão completa de problemas (CRUD)</p>
+                                                <FiShield className="text-red-500" />
+                                                <p>Permissões e perfis (usuário, admin)</p>
                                             </li>
+
                                             <li className="flex items-center gap-1">
-                                                <FiTarget className="text-red-500" />
-                                                <p>Gestão completa de problemas (CRUD)</p>
+                                                <FiCpu className="text-red-500" />
+                                                <p>Inteligência para padrões e sugestões</p>
                                             </li>
                                         </ul>
                                         <div className="bg-green-800/40 rounded-xl p-2 grid grid-cols-[40px_1fr] gap-2 max-w-[380px]">
                                             <div className="w-10 h-10 bg-red-500 flex justify-center items-center rounded-xl my-auto">
                                                 <FaStar />
                                             </div>
-                                            <p className="leading-5 text-sm">Base sólida para qualquer cidade começar a organizar seus problemas urbanos</p>
+                                            <p className="leading-5 text-sm">Automação, rastreabilidade e análise para decisões mais estratégicas</p>
                                         </div>
                                     </div>
                                 </div>
@@ -196,33 +208,37 @@ export default function Page() {
                                             <div className="w-4 h-4 bg-violet-500 rounded-full"></div>
                                             <h4><b className="text-violet-500">4.Diferenciais</b></h4>
                                         </div>
-                                        <ul>
+                                        <ul className="flex-1 flex flex-col gap-1">
                                             <li className="flex items-center gap-1">
-                                                <FiTarget className="text-violet-500" />
-                                                <p>Gestão completa de problemas (CRUD)</p>
+                                                <FiGlobe className="text-violet-500" />
+                                                <p>Impacto ambiental e avaliação de riscos</p>
                                             </li>
+
                                             <li className="flex items-center gap-1">
-                                                <FiTarget className="text-violet-500" />
-                                                <p>Gestão completa de problemas (CRUD)</p>
+                                                <FiCheckSquare className="text-violet-500" />
+                                                <p>Checklist de riscos (acidente, elétrico, ambiental)</p>
                                             </li>
+
                                             <li className="flex items-center gap-1">
-                                                <FiTarget className="text-violet-500" />
-                                                <p>Gestão completa de problemas (CRUD)</p>
+                                                <FiCreditCard className="text-violet-500" />
+                                                <p>Simulação de custo total para resolução</p>
                                             </li>
+
                                             <li className="flex items-center gap-1">
-                                                <FiTarget className="text-violet-500" />
-                                                <p>Gestão completa de problemas (CRUD)</p>
+                                                <FiAward className="text-violet-500" />
+                                                <p>Sistema de pontuação avançado (score)</p>
                                             </li>
+
                                             <li className="flex items-center gap-1">
-                                                <FiTarget className="text-violet-500" />
-                                                <p>Gestão completa de problemas (CRUD)</p>
+                                                <FiFileText className="text-violet-500" />
+                                                <p>Relatórios e exportação de dados</p>
                                             </li>
                                         </ul>
                                         <div className="bg-green-800/40 rounded-xl p-2 grid grid-cols-[40px_1fr] gap-2 max-w-[380px]">
                                             <div className="w-10 h-10 bg-violet-500 flex justify-center items-center rounded-xl my-auto">
                                                 <FaStar />
                                             </div>
-                                            <p className="leading-5 text-sm">Base sólida para qualquer cidade começar a organizar seus problemas urbanos</p>
+                                            <p className="leading-5 text-sm">Recursos que colocam o CivicTrack em outro nível de inovação.</p>
                                         </div>
                                     </div>
                                 </div>

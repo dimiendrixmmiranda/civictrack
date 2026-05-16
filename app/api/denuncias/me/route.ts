@@ -1,7 +1,5 @@
 import { prisma } from "@/lib/prisma"
-
 import { cookies } from "next/headers"
-
 import { verifyToken } from "@/lib/auth"
 
 export async function GET() {
@@ -13,7 +11,6 @@ export async function GET() {
         const token = cookieStore.get("token")?.value
 
         if (!token) {
-
             return Response.json(
                 { error: "Não autenticado" },
                 { status: 401 }
@@ -23,7 +20,6 @@ export async function GET() {
         const payload = verifyToken(token)
 
         if (!payload) {
-
             return Response.json(
                 { error: "Token inválido" },
                 { status: 401 }
@@ -37,7 +33,16 @@ export async function GET() {
             },
 
             include: {
-                endereco: true
+                endereco: true,
+
+                user: {
+                    select: {
+                        id: true,
+                        name: true,
+                        email: true,
+                        imagem: true
+                    }
+                }
             },
 
             orderBy: {

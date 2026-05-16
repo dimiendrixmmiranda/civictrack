@@ -4,6 +4,52 @@ import { cookies } from "next/headers"
 
 import { verifyToken } from "@/lib/auth"
 
+export async function GET(
+    req: Request,
+    { params }: { params: Promise<{ id: string }> }
+) {
+    try {
+
+        const { id } = await params
+
+        const denuncias = await prisma.denuncia.findMany({
+
+            where: {
+                userId: id
+            },
+
+            include: {
+
+                endereco: true,
+
+                user: {
+                    select: {
+                        id: true,
+                        name: true,
+                        email: true,
+                        imagem: true
+                    }
+                }
+            },
+
+            orderBy: {
+                createdAt: 'desc'
+            }
+        })
+
+        return Response.json(denuncias)
+
+    } catch (error) {
+
+        console.error(error)
+
+        return Response.json(
+            { error: "Erro interno" },
+            { status: 500 }
+        )
+    }
+}
+
 export async function PATCH(
     req: Request,
     { params }: { params: Promise<{ id: string }> }

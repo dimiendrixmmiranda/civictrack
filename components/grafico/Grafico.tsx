@@ -20,31 +20,11 @@ const COLORS = [
     "#BFC6C4",
 ]
 
-export default function Grafico() {
-    const { denuncias } = useDenuncias()
-    const categoriasFixas = [
-        "infraestrutura",
-        "iluminacao",
-        "limpeza",
-        "meio-ambiente",
-        "drenagem",
-        "seguranca",
-        "outros",
-    ]
-    const categorias = categoriasFixas.map((categoria) => {
+interface GraficoProps {
+    categorias: { name: string, value: number }[]
+}
 
-        const quantidade = denuncias.filter(
-            denuncia => denuncia.categoria === categoria
-        ).length
-
-        return {
-            name: categoria,
-            value: quantidade
-        }
-    })
-
-    console.log(categorias)
-
+export default function Grafico({ categorias }: GraficoProps) {
     return (
         <div className="col-start-2 col-end-3 w-full h-[300px] flex flex-col bg-cinza rounded-xl p-4">
             <h2 className="text-white font-bebas text-3xl">
@@ -78,11 +58,11 @@ export default function Grafico() {
                 <div className="flex flex-col gap-2 my-auto">
                     <div className="flex flex-col capitalize gap-1.5">
                         {
-                            categoriasFixas.map((cat, i) => {
+                            categorias.map((cat, i) => {
                                 return (
                                     <div className="flex items-center gap-2" key={i}>
                                         <div className="w-5 h-5 rounded-full" style={{ backgroundColor: COLORS[i] }}></div>
-                                        <p className="text-sm">{cat}</p>
+                                        <p className="text-sm">{cat.name}</p>
                                     </div>
                                 )
                             })
