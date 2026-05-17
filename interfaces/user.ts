@@ -10,5 +10,6 @@ export default interface User {
     createdAt: Date
     updatedAt: Date
     endereco: Endereco
+    telefone: string
     role: Role
 }

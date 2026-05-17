@@ -34,7 +34,6 @@ function LocationMarker({
         lng
     ])
 
-    // ÍCONE CUSTOMIZADO
     const customIcon = L.icon({
 
         // ÍCONE PRINCIPAL
@@ -44,7 +43,7 @@ function LocationMarker({
         shadowUrl: "/leaflet/default.png",
 
         // TAMANHO
-        iconSize: [40, 55],
+        iconSize: [30, 50],
 
         // POSIÇÃO
         iconAnchor: [20, 40],
@@ -94,7 +93,7 @@ export default function MapSelector({
             center={[lat, lng]}
             zoom={15}
             style={{
-                height: "300px",
+                height: "100%",
                 width: "100%"
             }}
         >

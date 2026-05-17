@@ -62,7 +62,9 @@ export default function Painel() {
 
     console.log(user)
 
-    if (loading) return <p>Carregando...</p>
+    if (loading) return <div className="w-full h-full flex justify-center items-center bg-azul-escuro font-bebas text-4xl">
+        Carregando
+    </div>
 
     if (!user) return <p>Não logado</p>
 

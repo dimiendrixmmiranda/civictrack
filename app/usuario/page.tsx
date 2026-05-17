@@ -166,7 +166,7 @@ export default function Page() {
             <div className="bg-black 2xl:grid 2xl:grid-cols-[300px_1fr] 2xl:gap-4">
                 <div className="w-full h-[99%] bg-cinza p-4 my-1 flex flex-col gap-6 hidden 2xl:block">
                     <div className="grid grid-cols-[80px_1fr] gap-4">
-                        <div className="relative w-[80px] h-[80px] rounded-full bg-green-500 border-2 border-black">
+                        <div className="relative w-[80px] h-[80px] rounded-full overflow-hidden bg-green-500 border-2 border-black">
                             <Image alt="Imagem do usuário" src={user.imagem} fill unoptimized className="object-cover" />
                         </div>
                         <div className="min-w-0 flex flex-col justify-center">
@@ -222,7 +222,7 @@ export default function Page() {
                     <div className="border-2 border-zinc-600 rounded-xl p-4 mt-4">
                         <h3 className="font-bebas text-2xl">Quer ajudar mais?</h3>
                         <p>Sua participação melhora a cidade para todos!</p>
-                        <Link href={'/'} className="flex bg-verde items-center justify-center font-bold text-lg py-1 rounded-md gap-1 mt-4" style={{ textShadow: '1px 1px 2px black' }}>
+                        <Link href={'/criarDenuncia'} className="flex bg-verde items-center justify-center font-bold text-lg py-1 rounded-md gap-1 mt-4" style={{ textShadow: '1px 1px 2px black' }}>
                             <FaPlusCircle />
                             <p>Fazer nova denúncia</p>
                         </Link>

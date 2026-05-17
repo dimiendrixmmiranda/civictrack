@@ -256,14 +256,16 @@ export default function Page() {
                                         </button>
                                     </div>
                                     {mostrarMapa && (
-                                        <MapSelector
-                                            lat={lat}
-                                            lng={lng}
-                                            onChange={(novaLat, novaLng) => {
-                                                setLat(novaLat)
-                                                setLng(novaLng)
-                                            }}
-                                        />
+                                        <div className="w-full h-[300px] mt-4">
+                                            <MapSelector
+                                                lat={lat}
+                                                lng={lng}
+                                                onChange={(novaLat, novaLng) => {
+                                                    setLat(novaLat)
+                                                    setLng(novaLng)
+                                                }}
+                                            />
+                                        </div>
                                     )}
                                 </div>
                                 {/* sexo */}

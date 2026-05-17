@@ -109,6 +109,7 @@ export async function GET() {
             email: user.email,
             role: user.role,
             imagem: user.imagem,
+            telefone: user.telefone,
             endereco: user.endereco,
             createdAt: user.createdAt,
             updatedAt: user.updatedAt,

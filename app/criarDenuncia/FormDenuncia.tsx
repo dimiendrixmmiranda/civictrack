@@ -54,19 +54,19 @@ const problemasPorCategoria = {
 }
 
 const iconesCategoria = {
-    infraestrutura: "/leaflet/buraco.png",
+    infraestrutura: "/leaflet/infraestrutura.png",
 
-    iluminacao: "/leaflet/lampada.png",
+    iluminacao: "/leaflet/iluminacao.png",
 
-    limpeza: "/leaflet/lixo.png",
+    limpeza: "/leaflet/limpeza.png",
 
     "meio-ambiente": "/leaflet/meio-ambiente.png",
 
-    drenagem: "/leaflet/alagamento.png",
+    drenagem: "/leaflet/drenagem.png",
 
     seguranca: "/leaflet/seguranca.png",
 
-    outro: "/leaflet/pino.png",
+    outro: "/leaflet/outros.png",
 }
 
 export default function FormDenuncia() {
@@ -79,6 +79,9 @@ export default function FormDenuncia() {
     const [complemento, setComplemento] = useState('')
     const [lat, setLat] = useState(-23.498135049294113)
     const [lng, setLng] = useState(-49.924035990689596)
+
+    const [uploading, setUploading] = useState(false)
+    const [imageLoading, setImageLoading] = useState(false)
 
     const [loading, setLoading] = useState(false)
 
@@ -181,29 +184,46 @@ export default function FormDenuncia() {
     async function handleUpload(
         e: React.ChangeEvent<HTMLInputElement>
     ) {
+
         const file = e.target.files?.[0]
 
         if (!file) return
 
-        const formData = new FormData()
+        try {
 
-        formData.append("file", file)
+            setUploading(true)
 
-        const res = await fetch("/api/upload", {
-            method: "POST",
-            body: formData
-        })
+            const formData = new FormData()
 
-        const data = await res.json()
-        setImagem(data.url)
-        console.log(data.url)
+            formData.append("file", file)
+
+            const res = await fetch("/api/upload", {
+                method: "POST",
+                body: formData
+            })
+
+            const data = await res.json()
+
+            setImageLoading(true)
+
+            setImagem(data.url)
+
+        } catch (err) {
+
+            console.error(err)
+
+            alert("Erro ao enviar imagem")
+
+        } finally {
+
+            setUploading(false)
+        }
     }
 
     return (
-        <form className="flex flex-col gap-6 max-w-xl">
+        <form className="flex flex-col gap-6 max-w-[1000px] mx-auto">
             <fieldset className="flex flex-col gap-2">
-
-                <label htmlFor="categoria">
+                <label htmlFor="categoria" className="font-bebas text-3xl">
                     Selecione a categoria do problema
                 </label>
 
@@ -211,37 +231,37 @@ export default function FormDenuncia() {
                     id="categoria"
                     value={categoria}
                     onChange={(e) => setCategoria(e.target.value)}
-                    className="p-3 rounded border"
+                    className="p-3 rounded border border-zinc-500"
                 >
-                    <option value="">
+                    <option className="bg-zinc-500 text-zinc-200" value="">
                         Selecione
                     </option>
 
-                    <option value="infraestrutura">
+                    <option className="bg-zinc-500 text-zinc-200" value="infraestrutura">
                         Infraestrutura
                     </option>
 
-                    <option value="iluminacao">
+                    <option className="bg-zinc-500 text-zinc-200" value="iluminacao">
                         Iluminação
                     </option>
 
-                    <option value="limpeza">
+                    <option className="bg-zinc-500 text-zinc-200" value="limpeza">
                         Limpeza
                     </option>
 
-                    <option value="meio-ambiente">
+                    <option className="bg-zinc-500 text-zinc-200" value="meio-ambiente">
                         Meio Ambiente
                     </option>
 
-                    <option value="drenagem">
+                    <option className="bg-zinc-500 text-zinc-200" value="drenagem">
                         Drenagem
                     </option>
 
-                    <option value="seguranca">
+                    <option className="bg-zinc-500 text-zinc-200" value="seguranca">
                         Segurança
                     </option>
 
-                    <option value="outro">
+                    <option className="bg-zinc-500 text-zinc-200" value="outro">
                         Outro
                     </option>
                 </select>
@@ -258,7 +278,7 @@ export default function FormDenuncia() {
 
                             <select
                                 id="problema"
-                                className="p-3 rounded border"
+                                className="p-3 rounded border border-zinc-500"
                                 onChange={(e) => setTipoDoProblema(e.target.value)}
 
                             >
@@ -284,30 +304,34 @@ export default function FormDenuncia() {
                         </fieldset>
 
                         <fieldset>
-                            <h3>Dados do endereço próximo ao problema:</h3>
-                            <fieldset className="flex flex-col">
-                                <label htmlFor="rua">
-                                    Nome da rua
-                                </label>
-                                <input type="text" name="rua" id="rua" value={rua} onChange={(e) => setRua(e.target.value)} className="border-2 border-black p-2 rounded-md" />
+                            <h3 className="font-bebas text-xl">Dados do endereço próximo ao problema:</h3>
+                            <fieldset className="md:grid md:grid-cols-[1fr_100px] md:w-full md:gap-4">
+                                <fieldset className="flex flex-col w-full">
+                                    <label htmlFor="rua">
+                                        Nome da rua
+                                    </label>
+                                    <input type="text" name="rua" id="rua" value={rua} onChange={(e) => setRua(e.target.value)} className="border border-zinc-500 p-2 rounded-md" />
+                                </fieldset>
+                                <fieldset className="flex flex-col w-full">
+                                    <label htmlFor="numero">
+                                        Número
+                                    </label>
+                                    <input type="text" name="numero" id="numero" value={numero} onChange={(e) => setNumero(e.target.value)} className="border border-zinc-500 p-2 rounded-md w-full" />
+                                </fieldset>
                             </fieldset>
-                            <fieldset className="flex flex-col">
-                                <label htmlFor="numero">
-                                    Número
-                                </label>
-                                <input type="text" name="numero" id="numero" value={numero} onChange={(e) => setNumero(e.target.value)} className="border-2 border-black p-2 rounded-md" />
-                            </fieldset>
-                            <fieldset className="flex flex-col">
-                                <label htmlFor="bairro">
-                                    Bairro
-                                </label>
-                                <input type="text" name="bairro" id="bairro" value={bairro} onChange={(e) => setBairro(e.target.value)} className="border-2 border-black p-2 rounded-md" />
-                            </fieldset>
-                            <fieldset className="flex flex-col">
-                                <label htmlFor="complemento">
-                                    complemento
-                                </label>
-                                <input type="text" name="complemento" id="complemento" value={complemento} onChange={(e) => setComplemento(e.target.value)} className="border-2 border-black p-2 rounded-md" />
+                            <fieldset className="md:grid md:grid-cols-2 md:w-full md:gap-4">
+                                <fieldset className="flex flex-col">
+                                    <label htmlFor="bairro">
+                                        Bairro
+                                    </label>
+                                    <input type="text" name="bairro" id="bairro" value={bairro} onChange={(e) => setBairro(e.target.value)} className="border border-zinc-500 p-2 rounded-md" />
+                                </fieldset>
+                                <fieldset className="flex flex-col">
+                                    <label htmlFor="complemento">
+                                        Complemento
+                                    </label>
+                                    <input type="text" name="complemento" id="complemento" value={complemento} onChange={(e) => setComplemento(e.target.value)} className="border border-zinc-500 p-2 rounded-md w-full" />
+                                </fieldset>
                             </fieldset>
                         </fieldset>
 
@@ -324,7 +348,7 @@ export default function FormDenuncia() {
                                 ref={inputRef}
                                 onChange={handleUpload}
                                 className={
-                                    `    
+                                    `
                                         file:bg-verde
                                         file:border-0
                                         file:text-white
@@ -336,15 +360,62 @@ export default function FormDenuncia() {
                                     `
                                 }
                             />
+                            {/* LOADING UPLOAD */}
+                            {
+                                uploading && (
+                                    <div
+                                        className="
+                                            w-64
+                                            h-40
+                                            rounded-lg
+                                            border
+                                            flex
+                                            items-center
+                                            justify-center
+                                            bg-gray-700
+                                        "
+                                    >
+                                        <p className="text-white">
+                                            Enviando imagem...
+                                        </p>
+                                    </div>
+                                )
+                            }
 
                             {/* PREVIEW */}
                             {
                                 imagem && (
-                                    <div className="relative w-fit">
+                                    <div className="relative w-fit bg-zinc-800 rounded-xl">
+
+                                        {/* LOADING PREVIEW */}
+                                        {
+                                            imageLoading && (
+                                                <div
+                                                    className="
+                                                        absolute
+                                                        inset-0
+                                                        w-64
+                                                        h-40
+                                                        rounded-lg
+                                                        border
+                                                        flex
+                                                        items-center
+                                                        justify-center
+                                                        bg-gray-700
+                                                        z-10
+                                                    "
+                                                >
+                                                    <p className="text-white">
+                                                        Carregando preview...
+                                                    </p>
+                                                </div>
+                                            )
+                                        }
 
                                         <img
                                             src={imagem}
                                             alt="Preview"
+                                            onLoad={() => setImageLoading(false)}
                                             className="
                                                     w-64
                                                     h-40
@@ -367,6 +438,7 @@ export default function FormDenuncia() {
                                                 py-1
                                                 rounded
                                                 text-sm
+                                                z-20
                                             "
                                         >
                                             Remover

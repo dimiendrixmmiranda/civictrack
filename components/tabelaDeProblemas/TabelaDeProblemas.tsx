@@ -14,7 +14,7 @@ interface TabelaDeProblemasProps {
 export default function TabelaDeProblemas({ denuncias, qtdeDeLinhas, altura }: TabelaDeProblemasProps) {
 
     return (
-        <section className="bg-black col-start-1 col-end-2">
+        <section className="col-start-1 col-end-2">
             <div className="bg-cinza p-4 flex flex-col gap-4 rounded-xl overflow-hidden">
                 <div className="flex justify-between items-center">
                     <h2 className="font-bebas text-2xl">Problemas recentes</h2>
@@ -75,7 +75,7 @@ export default function TabelaDeProblemas({ denuncias, qtdeDeLinhas, altura }: T
                                 "
                                     >
                                         <div className="flex items-center justify-center">
-                                            <div className="w-8 h-8 bg-red-500 rounded-full relative">
+                                            <div className="w-8 h-8 rounded-full relative">
                                                 <Image alt={problema.categoria} src={`/categorias/${problema.categoria}.png`} fill className="object-cover"/>
                                             </div>
                                         </div>
