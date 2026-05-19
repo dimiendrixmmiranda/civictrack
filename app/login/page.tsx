@@ -4,6 +4,7 @@ import Template from "@/components/template/Template";
 import { useState } from "react";
 
 import dynamic from "next/dynamic"
+import InputSenha from "@/components/inputSenha/InputSenha";
 
 const MapSelector = dynamic(
     () => import("@/components/mapSelector/MapSelector"),
@@ -277,7 +278,7 @@ export default function Page() {
                             <form className="p-2 border-2 border-verde rounded-xl max-w-[600px] w-full mx-auto">
                                 <h2 className="font-bebas text-2xl">Login</h2>
                                 {gerarCampo("email", "Informe seu email:", email, setEmail)}
-                                {gerarCampo("senha", "Crie uma senha", senha, setSenha)}
+                                <InputSenha id="senha" textoLabel="Senha" senha={senha} setSenha={setSenha}/>
                                 <button onClick={handleLogin} disabled={loading} className="mt-4 bg-verde-claro flex rounded-md w-full text-center justify-center items-center text-white font-bebas text-3xl py-1 pt-1.5" style={{ textShadow: '1px 1px 2px black' }}>
                                     Entrar
                                 </button>

@@ -163,8 +163,8 @@ export default function Page() {
                     </div>
                 ) : ''
             }
-            <div className="bg-black 2xl:grid 2xl:grid-cols-[300px_1fr] 2xl:gap-4">
-                <div className="w-full h-[99%] bg-cinza p-4 my-1 flex flex-col gap-6 hidden 2xl:block">
+            <div className="bg-black 2xl:grid 2xl:grid-cols-[300px_1fr]">
+                <div className="w-full bg-cinza p-4 flex flex-col gap-6 hidden border-r-2 border-zinc-600 2xl:block">
                     <div className="grid grid-cols-[80px_1fr] gap-4">
                         <div className="relative w-[80px] h-[80px] rounded-full overflow-hidden bg-green-500 border-2 border-black">
                             <Image alt="Imagem do usuário" src={user.imagem} fill unoptimized className="object-cover" />

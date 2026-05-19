@@ -19,7 +19,7 @@ export default function Cabecalho() {
     const pathname = usePathname()
 
     return (
-        <header className="bg-azul-escuro grid grid-cols-[1fr_40px] p-2 md:grid-cols-[auto_1fr_140px]">
+        <header className="bg-azul-escuro grid grid-cols-[1fr_40px] p-2 md:grid-cols-[auto_1fr_190px] lg:grid-cols-[auto_1fr_220px]">
             <Link href={'/'} className="flex items-center gap-1">
                 <div className="relative w-10 h-10">
                     <Image
@@ -38,10 +38,12 @@ export default function Cabecalho() {
                     className={`
                         flex
                         justify-center
+                        text-sm
                         items-center
                         p-2
                         transition-all
                         border-b-2
+                        lg:text-base
                         ${pathname === '/'
                             ? 'border-verde'
                             : 'border-transparent'
@@ -69,10 +71,12 @@ export default function Cabecalho() {
                     className={`
                         flex
                         justify-center
+                        text-sm
                         items-center
                         p-2
                         transition-all
                         border-b-2
+                        lg:text-base
                         ${pathname === '/sobre'
                             ? 'border-verde'
                             : 'border-transparent'
@@ -100,10 +104,12 @@ export default function Cabecalho() {
                     className={`
                         flex
                         justify-center
+                        text-sm
                         items-center
                         p-2
                         transition-all
                         border-b-2
+                        lg:text-base
                         ${pathname === '/denuncias'
                             ? 'border-verde'
                             : 'border-transparent'
@@ -131,10 +137,12 @@ export default function Cabecalho() {
                     className={`
                         flex
                         justify-center
+                        text-sm
                         items-center
                         p-2
                         transition-all
                         border-b-2
+                        lg:text-base
                         ${pathname === '/contato'
                             ? 'border-verde'
                             : 'border-transparent'
@@ -161,7 +169,7 @@ export default function Cabecalho() {
 
             </ul>
 
-            <div className="hidden md:flex">
+            <div className="hidden md:flex justify-center">
                 {
                     user ? (
                         <Link
@@ -214,12 +222,13 @@ export default function Cabecalho() {
 
                     ) : (
 
-                        <ul className="w-full h-full justify-center items-center hidden md:flex">
-
+                        <ul className="w-full h-full justify-center items-center hidden md:flex gap-2">
                             <li
                                 className="
                                     flex
                                     justify-center
+                                    text-xs
+                                    lg:text-sm
                                     items-center
                                     p-2
                                     rounded-md
@@ -229,22 +238,41 @@ export default function Cabecalho() {
                                 "
                                 style={{ textShadow: '1px 1px 2px black' }}
                             >
-
                                 <Link
                                     href={'/login'}
                                     className="flex items-center gap-1"
                                 >
-
                                     <div>
                                         <RiLoginBoxFill />
                                     </div>
-
                                     <span>Entrar</span>
-
                                 </Link>
-
                             </li>
-
+                            <li
+                                className="
+                                    flex
+                                    justify-center
+                                    text-xs
+                                    lg:text-sm
+                                    items-center
+                                    p-2
+                                    rounded-md
+                                    bg-azul-claro
+                                    transition-all
+                                    hover:bg-verde
+                                "
+                                style={{ textShadow: '1px 1px 2px black' }}
+                            >
+                                <Link
+                                    href={'/login'}
+                                    className="flex items-center gap-1"
+                                >
+                                    <div>
+                                        <RiLoginBoxFill />
+                                    </div>
+                                    <span>Cadastre-se</span>
+                                </Link>
+                            </li>
                         </ul>
 
                     )
