@@ -160,7 +160,7 @@ export default function MeuPerfil() {
     }
 
     return (
-        <div className="bg-cinza pl-8">
+        <div className="bg-cinza xl:pl-8">
             <div className="bg-cinza p-4 min-h-full flex flex-col gap-4">
                 <h2 className="font-bebas text-4xl">Meu perfil</h2>
                 <div className="flex flex-col gap-6">

@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma"
 import { cookies } from "next/headers"
 
 import { verifyToken } from "@/lib/auth"
+import { criarNotificacao } from "@/lib/notificacao"
 
 export async function POST(req: Request) {
 
@@ -88,6 +89,14 @@ export async function POST(req: Request) {
                 endereco: true,
                 user: true
             }
+        })
+
+        await criarNotificacao({
+            title: 'Denúncia criada',
+            message: `Sua denúncia de ${categoria} foi registrada com sucesso.`,
+            type: 'denuncia-criada',
+            userId: payload.userId,
+            denunciaId: denuncia.id
         })
 
         return Response.json(denuncia)

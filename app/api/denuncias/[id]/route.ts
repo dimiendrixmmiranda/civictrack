@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma"
 import { cookies } from "next/headers"
 
 import { verifyToken } from "@/lib/auth"
+import { criarNotificacao } from "@/lib/notificacao"
 
 export async function GET(
     req: Request,
@@ -129,8 +130,49 @@ export async function PATCH(
                 ...(custo !== undefined && {
                     custo
                 })
+            },
+
+            include: {
+                user: true
             }
         })
+
+        if (risco) {
+            await criarNotificacao({
+                title: 'Risco definido',
+                message: `O risco da sua denúncia foi definido como ${risco}.`,
+                type: 'risco-definido',
+                userId: denuncia.userId,
+                denunciaId: denuncia.id
+            })
+        }
+        if (prioridade) {
+            await criarNotificacao({
+                title: 'Prioridade Definida',
+                message: `A prioridade da sua denúncia foi definido como ${prioridade}.`,
+                type: 'prioridade-definida',
+                userId: denuncia.userId,
+                denunciaId: denuncia.id
+            })
+        }
+        if (custo) {
+            await criarNotificacao({
+                title: 'Custo Definido',
+                message: `O custo para a solução da sua denúncia foi definido com o valor de R$${custo}.`,
+                type: 'custo-definido',
+                userId: denuncia.userId,
+                denunciaId: denuncia.id
+            })
+        }
+        if (status) {
+            await criarNotificacao({
+                title: 'Concluído!',
+                message: `Sua denúncia foi concluida com sucesso! Obrigado por ajudar nossa cidade.`,
+                type: 'denuncia-concluida',
+                userId: denuncia.userId,
+                denunciaId: denuncia.id
+            })
+        }
 
         return Response.json(denuncia)
 

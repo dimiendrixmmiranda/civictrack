@@ -2,7 +2,7 @@ import FormDenuncia from "@/app/criarDenuncia/FormDenuncia";
 
 export default function NovaDenuncia() {
     return (
-        <div className="bg-cinza pl-8">
+        <div className="bg-cinza xl:pl-8">
             <div className="p-2 2xl:h-[600px] 2xl:overflow-y-scroll barra">
                 <h2 className="font-bebas text-4xl text-center">Nova denuncia</h2>
                 <FormDenuncia />

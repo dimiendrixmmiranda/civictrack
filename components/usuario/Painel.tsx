@@ -132,7 +132,7 @@ export default function Painel() {
                             </div>
                         </div>
                     </li>
-                    <li className="flex justify-center">
+                    <li className="flex justify-center w-full">
                         <div className="bg-azul-escuro p-3 flex gap-2 rounded-xl w-full">
                             <div className="w-15 h-15 bg-red-600 flex justify-center items-center rounded-2xl">
                                 <FaExclamationTriangle className="text-4xl" />
@@ -146,7 +146,7 @@ export default function Painel() {
                             </div>
                         </div>
                     </li>
-                    <li className="flex justify-center">
+                    <li className="flex justify-center w-full">
                         <div className="bg-azul-escuro p-3 flex gap-2 rounded-xl w-full">
                             <div className="w-15 h-15 bg-green-600 flex justify-center items-center rounded-2xl">
                                 <FaCheckDouble className="text-4xl" />
@@ -160,7 +160,7 @@ export default function Painel() {
                             </div>
                         </div>
                     </li>
-                    <li className="flex justify-center">
+                    <li className="flex justify-center w-full">
                         <div className="bg-azul-escuro p-3 flex gap-2 rounded-xl w-full">
                             <div className="w-15 h-15 bg-purple-600 flex justify-center items-center rounded-2xl">
                                 <RiMoneyDollarCircleFill className="text-4xl" />

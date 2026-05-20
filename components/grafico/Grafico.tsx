@@ -59,7 +59,7 @@ export default function Grafico({ categorias }: GraficoProps) {
                                 </PieChart>
                             </ResponsiveContainer>
                         </div>
-                        <div className="flex flex-col gap-2 my-auto">
+                        <div className="flex-col gap-2 my-auto hidden md:flex xl:hidden 2xl:flex">
                             <div className="flex flex-col capitalize gap-1.5">
                                 {
                                     categorias.map((cat, i) => {

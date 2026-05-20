@@ -448,21 +448,23 @@ export default function FormDenuncia() {
                                 )
                             }
                         </div>
-                        <MapSelector
-                            lat={lat}
-                            lng={lng}
+                        <div className="h-[500px] rounded-md overflow-hidden">
+                            <MapSelector
+                                lat={lat}
+                                lng={lng}
 
-                            iconUrl={
-                                iconesCategoria[
-                                categoria as keyof typeof iconesCategoria
-                                ]
-                            }
+                                iconUrl={
+                                    iconesCategoria[
+                                    categoria as keyof typeof iconesCategoria
+                                    ]
+                                }
 
-                            onChange={(novaLat, novaLng) => {
-                                setLat(novaLat)
-                                setLng(novaLng)
-                            }}
-                        />
+                                onChange={(novaLat, novaLng) => {
+                                    setLat(novaLat)
+                                    setLng(novaLng)
+                                }}
+                            />
+                        </div>
                         <button className="bg-azul-claro text-white font-bebas text-4xl pt-1.5 rounded-xl" onClick={handleCreateDenuncia}>Enviar Denúncia!</button>
                     </>
                 )

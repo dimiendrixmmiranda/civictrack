@@ -13,6 +13,8 @@
   --cinza-2: #051222;
 }
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --breakpoint-sm: 425px;
   --breakpoint-md: 768px;

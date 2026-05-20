@@ -34,6 +34,7 @@ model User {
   enderecoId String?   @unique
 
   denuncias  Denuncia[]
+  notifications Notification[]
 
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -78,6 +79,26 @@ model Denuncia {
   userId           String
   user             User @relation(fields: [userId], references: [id])
 
+  notifications Notification[]
+
   enderecoId       String
   endereco         Endereco @relation(fields: [enderecoId], references: [id])
+}
+
+model Notification {
+  id          String   @id @default(cuid())
+
+  title       String
+  message     String
+
+  type        String
+  read        Boolean @default(false)
+
+  denunciaId  String?
+  denuncia    Denuncia? @relation(fields: [denunciaId], references: [id])
+
+  userId      String
+  user        User @relation(fields: [userId], references: [id])
+
+  createdAt   DateTime @default(now())
 }

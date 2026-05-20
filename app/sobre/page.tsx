@@ -17,7 +17,7 @@ export default function Page() {
                 md:p-6
             "
             >
-                <div className="xl:grid xl:grid-cols-2 xl:gap-10 max-w-[1440px] mx-auto">
+                <div className="flex flex-col gap-6 xl:grid xl:grid-cols-2 xl:gap-10 max-w-[1440px] mx-auto">
                     <button className="bg-verde-claro border-2 border-verde p-1 px-4 font-bebas text-2xl rounded-2xl mb-4 col-start-1 col-end-3 max-w-[250px]" style={{ textShadow: '1px 1px 2px black' }}>
                         Sobre o projeto
                     </button>
@@ -77,13 +77,13 @@ export default function Page() {
                             <div className="flex flex-col gap-2">
                                 <div className="flex items-center gap-3">
                                     <FaTools className="xl:text-6xl text-verde-claro" />
-                                    <h2 className="font-bebas xl:text-6xl mt-1">Mapa de funcionalidades</h2>
+                                    <h2 className="text-3xl font-bebas xl:text-6xl mt-1">Mapa de funcionalidades</h2>
                                 </div>
                                 <p>Confira os principais recursos do CivicTrack organizados por nível de maturidade.</p>
                             </div>
-                            <div className="xl:grid xl:grid-cols-4 gap-4 2xl:gap-6">
+                            <div className="flex flex-col gap-4 md:grid md:grid-cols-2 md:gap-4 xl:grid xl:grid-cols-4 2xl:gap-6">
                                 <div>
-                                    <div className="bg-cinza p-4 rounded-md flex flex-col gap-3 w-fit">
+                                    <div className="bg-cinza p-4 rounded-md flex flex-col gap-3 w-full">
                                         <div className="flex items-center gap-1 text-xl">
                                             <div className="w-4 h-4 bg-verde rounded-full"></div>
                                             <h4><b className="text-verde">1.Core</b> (Essencial)</h4>
@@ -123,7 +123,7 @@ export default function Page() {
                                     </div>
                                 </div>
                                 <div>
-                                    <div className="bg-cinza p-4 rounded-md flex flex-col gap-3 w-fit h-full">
+                                    <div className="bg-cinza p-4 rounded-md flex flex-col gap-3 w-full h-full">
                                         <div className="flex items-center gap-1 text-xl">
                                             <div className="w-4 h-4 bg-yellow-500 rounded-full"></div>
                                             <h4><b className="text-yellow-500">2.Intermediário</b></h4>
@@ -163,7 +163,7 @@ export default function Page() {
                                     </div>
                                 </div>
                                 <div>
-                                    <div className="bg-cinza p-4 rounded-md flex flex-col gap-3 w-fit h-full">
+                                    <div className="bg-cinza p-4 rounded-md flex flex-col gap-3 w-full h-full">
                                         <div className="flex items-center gap-1 text-xl">
                                             <div className="w-4 h-4 bg-red-500 rounded-full"></div>
                                             <h4><b className="text-red-500">3.Avançado</b></h4>
@@ -203,7 +203,7 @@ export default function Page() {
                                     </div>
                                 </div>
                                 <div>
-                                    <div className="bg-cinza p-4 rounded-md flex flex-col gap-3 w-fit">
+                                    <div className="bg-cinza p-4 rounded-md flex flex-col gap-3 w-full">
                                         <div className="flex items-center gap-1 text-xl">
                                             <div className="w-4 h-4 bg-violet-500 rounded-full"></div>
                                             <h4><b className="text-violet-500">4.Diferenciais</b></h4>

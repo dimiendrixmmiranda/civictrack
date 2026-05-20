@@ -64,7 +64,7 @@ export default function Configuracoes() {
     }
 
     return (
-        <div className="bg-cinza pl-8">
+        <div className="bg-cinza xl:pl-8">
             <div className="p-4 min-h-full flex flex-col gap-6">
                 <div>
                     <div className="flex items-center gap-2">

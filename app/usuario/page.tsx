@@ -10,11 +10,12 @@ import NovaDenuncia from "@/components/usuario/NovaDenuncia";
 import Painel from "@/components/usuario/Painel";
 import { useDenuncias } from "@/hooks/useDenuncias";
 import { useMinhasDenuncias } from "@/hooks/useDenunciasMe";
+import { useNotifications } from "@/hooks/useNotificacoes";
 import { useUser } from "@/hooks/useUser";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsBox2HeartFill } from "react-icons/bs";
 import { FaCheckDouble, FaClipboardList, FaExclamationTriangle, FaHeart, FaLeaf, FaPlusCircle } from "react-icons/fa";
 import { FiAlertCircle, FiBell, FiGrid, FiLogOut, FiPlusCircle, FiSettings, FiUser } from "react-icons/fi";
@@ -25,8 +26,17 @@ export default function Page() {
     const router = useRouter()
     const { user, loading } = useUser()
     const { denuncias } = useMinhasDenuncias()
-    console.log(denuncias)
+    const {
+        notifications,
+        unreadCount,
+    } = useNotifications()
     const [active, setActive] = useState<'painel' | 'minhas-denuncias' | 'nova-denuncia' | 'notificacoes' | 'meu-perfil' | 'configuracoes' | 'sair'>('painel')
+    const [notificacoesNaoLidas, setNotificacoesNaoLidas] = useState<number>(0)
+    
+    useEffect(() => {
+        const notNaoLidas = notifications.filter(not => not.read === false).length
+        if (notNaoLidas) setNotificacoesNaoLidas(notNaoLidas)
+    }, [notifications, denuncias])
 
     const denunciasDoMes = denuncias.filter((denuncia) => {
 
@@ -198,6 +208,7 @@ export default function Page() {
                             <li onClick={(e) => setActive('notificacoes')} className={`flex items-center gap-2 p-2 rounded-xl hover:bg-green-900 cursor-pointer hover:text-white duration-500 transition-all ${active === 'notificacoes' ? 'bg-green-900 text-white' : 'text-zinc-400'}`}>
                                 <FiBell className="text-green-500" />
                                 <span>Notificações</span>
+                                <p className="ml-auto text-sm bg-verde w-6 h-5 flex justify-center items-center rounded-full text-white">{notificacoesNaoLidas}</p>
                             </li>
 
                             <li onClick={(e) => setActive('meu-perfil')} className={`flex items-center gap-2 p-2 rounded-xl hover:bg-green-900 cursor-pointer hover:text-white duration-500 transition-all ${active === 'meu-perfil' ? 'bg-green-900 text-white' : 'text-zinc-400'}`}>
