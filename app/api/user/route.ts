@@ -1,10 +1,35 @@
 import { NextRequest, NextResponse } from "next/server"
-
 import { prisma } from "@/lib/prisma"
 
+import { cookies } from "next/headers"
+import { verifyToken } from "@/lib/auth"
+
 export async function PATCH(req: NextRequest) {
+
     try {
-        const user = await prisma.user.findFirst()
+
+        const cookieStore = await cookies()
+
+        const token = cookieStore.get("token")?.value
+
+        if (!token) {
+
+            return NextResponse.json(
+                { error: "Não autenticado" },
+                { status: 401 }
+            )
+        }
+
+        const payload = verifyToken(token)
+
+        if (!payload) {
+
+            return NextResponse.json(
+                { error: "Token inválido" },
+                { status: 401 }
+            )
+        }
+
         const body = await req.json()
 
         const {
@@ -12,16 +37,13 @@ export async function PATCH(req: NextRequest) {
             email,
             telefone,
             imagem,
-            endereco,
+            endereco
         } = body
-
-        // PEGAR USUÁRIO LOGADO
-        const userId = user?.id
 
         const updatedUser = await prisma.user.update({
 
             where: {
-                id: userId
+                id: payload.userId
             },
 
             data: {
@@ -72,6 +94,10 @@ export async function PATCH(req: NextRequest) {
                         }
                     }
                 })
+            },
+
+            include: {
+                endereco: true
             }
         })
 

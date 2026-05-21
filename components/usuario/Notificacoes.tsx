@@ -3,6 +3,7 @@ import { useNotifications } from "@/hooks/useNotificacoes"
 import Denuncia from "@/interfaces/Denuncia"
 import Image from "next/image"
 import { useState } from "react"
+import Dialog from "../caixaDeDialogo/CaixaDeDialogo"
 
 export interface Notificacao {
     id: string
@@ -20,12 +21,14 @@ export default function Notificacoes() {
     const {
         notifications,
         unreadCount,
-        loading
+        loading,
+        markAsRead,
+        deleteNotification
     } = useNotifications()
 
     const [notificaoSelecionada, setNotificacaoSelecionada] = useState<Notificacao | null>(null)
-
-    console.log(notificaoSelecionada)
+    const [dialogExcluiNotificacao, setDialogExcluiNotificacao] = useState(false)
+    const [dialogMarcarMensagemLida, setDialogMarcarMensagemLida] = useState(false)
 
     return (
         <div className="bg-cinza xl:pl-8 2xl:pr-8">
@@ -42,7 +45,7 @@ export default function Notificacoes() {
                                     notifications.map(notificacao => {
                                         return (
                                             <li key={notificacao.id} onClick={() => setNotificacaoSelecionada(notificacao)}>
-                                                <div className="grid grid-cols-[50px_1fr] items-center gap-2 p-2 bg-cinza-2 rounded-xl cursor-pointer">
+                                                <div className={`grid grid-cols-[50px_1fr] items-center gap-2 p-2 rounded-xl cursor-pointer ${notificacao?.read ? 'border-2 border-cinza-2': 'bg-cinza-2'}`}>
                                                     <div className="relative w-[50px] h-[50px] rounded-full">
                                                         <Image alt={notificacao.type} src={`/notificacoes/${notificacao.type}.png`} fill unoptimized className="object-cover" />
                                                     </div>
@@ -105,14 +108,15 @@ export default function Notificacoes() {
                                     </div>
                                     <div className="grid grid-cols-2 gap-4 mt-auto">
                                         <button
+                                            onClick={() => setDialogMarcarMensagemLida(true)}
                                             className="
-                                                    bg-verde
-                                                    font-bebas
-                                                    text-2xl
-                                                    pt-2
-                                                    pb-1
-                                                    rounded-xl
-                                                "
+                                                bg-verde
+                                                font-bebas
+                                                text-2xl
+                                                pt-2
+                                                pb-1
+                                                rounded-xl
+                                            "
                                             style={{
                                                 textShadow: '1px 2px 2px black'
                                             }}
@@ -132,10 +136,42 @@ export default function Notificacoes() {
                                             style={{
                                                 textShadow: '1px 2px 2px black'
                                             }}
+                                            onClick={() => setDialogExcluiNotificacao(true)}
                                         >
                                             Excluir Notificação
                                         </button>
                                     </div>
+                                    <Dialog
+                                        open={dialogExcluiNotificacao}
+                                        onClose={() => setDialogExcluiNotificacao(false)}
+                                        onConfirm={() => {
+                                            deleteNotification(
+                                                notificaoSelecionada.id
+                                            )
+                                            setDialogExcluiNotificacao(false)
+                                        }}
+                                        title="Excluir notificação"
+                                        description="
+                                            Tem certeza que deseja excluir
+                                            esta notificação?
+                                        "
+                                        confirmText="Excluir"
+                                    />
+                                    <Dialog
+                                        open={dialogMarcarMensagemLida}
+                                        onClose={() => setDialogMarcarMensagemLida(false)}
+                                        onConfirm={() => {
+                                            markAsRead(
+                                                notificaoSelecionada.id
+                                            )
+                                            setDialogMarcarMensagemLida(false)
+                                        }}
+                                        title="Marcar notificação como lida?"
+                                        description="
+                                            Tem certeza que deseja marcar essa notificação como lida?
+                                        "
+                                        confirmText="Marcar"
+                                    />
                                 </>
                             ) : (
 
@@ -156,6 +192,7 @@ export default function Notificacoes() {
                     </div>
                 </div>
             </div>
+
         </div>
     )
 }

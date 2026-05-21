@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRef } from "react"
 import dynamic from "next/dynamic"
+import Dialog from "@/components/caixaDeDialogo/CaixaDeDialogo";
 
 const MapSelector = dynamic(
     () => import("@/components/mapSelector/MapSelector"),
@@ -85,50 +86,24 @@ export default function FormDenuncia() {
 
     const [loading, setLoading] = useState(false)
 
+    const [criarDenuncia, setCriarDenuncia] = useState(false)
+
     const inputRef = useRef<HTMLInputElement>(null)
 
-    async function handleCreateDenuncia(
-        e: React.FormEvent
-    ) {
-
-        e.preventDefault()
-
+    async function criarDenunciaRequest() {
         try {
-
             setLoading(true)
-
-            // VALIDAÇÕES
             if (!categoria || !tipoDoProblema || !rua || !numero || !bairro || !lat || !lng) {
-
                 alert("Selecione a categoria")
-
-                return
-            }
-
-            if (!categoria) {
-
-                alert("Selecione o tipo do problema")
-
-                return
-            }
-
-            if (!rua || !bairro) {
-
-                alert("Preencha o endereço")
-
                 return
             }
 
             const res = await fetch("/api/denuncias", {
-
                 method: "POST",
-
                 headers: {
                     "Content-Type": "application/json"
                 },
-
                 credentials: "include",
-
                 body: JSON.stringify({
                     categoria,
                     tipoDoProblema,
@@ -154,22 +129,20 @@ export default function FormDenuncia() {
 
                 return
             }
-
-            alert("Denúncia criada com sucesso!")
-
-            // REDIRECIONA
-            window.location.href = "/criarDenuncia"
-
+            window.location.href = "/usuario"
         } catch (err) {
-
             console.error(err)
-
             alert("Erro ao criar denúncia")
-
         } finally {
-
             setLoading(false)
         }
+    }
+
+    function handleCreateDenuncia(
+        e: React.FormEvent
+    ) {
+        e.preventDefault()
+        setCriarDenuncia(true)
     }
 
     function removerImagem() {
@@ -466,6 +439,19 @@ export default function FormDenuncia() {
                             />
                         </div>
                         <button className="bg-azul-claro text-white font-bebas text-4xl pt-1.5 rounded-xl" onClick={handleCreateDenuncia}>Enviar Denúncia!</button>
+                        <Dialog
+                            open={criarDenuncia}
+                            onClose={() => setCriarDenuncia(false)}
+                            onConfirm={() => {
+                                criarDenunciaRequest()
+                                setCriarDenuncia(false)
+                            }}
+                            title="Deseja realmente criar essa denúncia?"
+                            description="
+                                Tem certeza que deseja criar essa denúncia?
+                            "
+                            confirmText="Criar"
+                        />
                     </>
                 )
             }

@@ -57,9 +57,20 @@ export function useNotifications() {
 
         try {
 
-            await fetch(`/api/notificacoes/${notificationId}`, {
-                method: 'PATCH'
-            })
+            console.log(notificationId)
+
+            const response = await fetch(
+                `/api/notificacoes/${notificationId}`,
+                {
+                    method: 'PATCH'
+                }
+            )
+
+            console.log(response)
+
+            if (!response.ok) {
+                throw new Error('Erro ao marcar')
+            }
 
             setNotifications((prev) =>
                 prev.map((notification) => {
@@ -103,6 +114,27 @@ export function useNotifications() {
         }
     }
 
+    async function deleteNotification(notificationId: string) {
+
+        try {
+
+            await fetch(`/api/notificacoes/${notificationId}`, {
+                method: 'DELETE'
+            })
+
+            setNotifications((prev) =>
+                prev.filter(
+                    (notification) =>
+                        notification.id !== notificationId
+                )
+            )
+
+        } catch (error) {
+
+            console.error(error)
+        }
+    }
+
     const unreadCount = notifications.filter(
         (notification) => !notification.read
     ).length
@@ -128,6 +160,7 @@ export function useNotifications() {
         unreadCount,
         fetchNotifications,
         markAsRead,
-        markAllAsRead
+        markAllAsRead,
+        deleteNotification
     }
 }

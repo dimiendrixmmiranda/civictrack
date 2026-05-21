@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import { GrUpdate } from "react-icons/gr"
+import Dialog from "../caixaDeDialogo/CaixaDeDialogo"
 
 const MapSelector = dynamic(
     () => import("@/components/mapSelector/MapSelector"),
@@ -25,13 +26,16 @@ export default function MeuPerfil() {
     const [bairro, setBairro] = useState('')
     const [complemento, setComplemento] = useState('')
 
-    const [latitude, setLatitude] = useState<number>(-23.498135049294113)
-    const [longitude, setLongitude] = useState<number>(-49.924035990689596)
-    const [novaLatitude, setNovaLatitude] = useState<number>(-23.498135049294113)
-    const [novaLongitude, setNovaLongitude] = useState<number>(-49.924035990689596)
+    const [latitude, setLatitude] = useState<number | null>()
+    const [longitude, setLongitude] = useState<number | null>()
+    const [novaLatitude, setNovaLatitude] = useState<number | null>(null)
+    const [novaLongitude, setNovaLongitude] = useState<number | null>(null)
 
     const [uploadingImage, setUploadingImage] = useState(false)
     const inputImageRef = useRef<HTMLInputElement>(null)
+
+    const [dialogConfirmarAlteracao, setDialogConfirmarAlteracao] = useState(false)
+
 
     async function handleUploadImagem(
         e: React.ChangeEvent<HTMLInputElement>
@@ -118,15 +122,14 @@ export default function MeuPerfil() {
             setTelefone(user?.telefone)
             setLatitude(user.endereco.latitude)
             setLongitude(user.endereco.longitude)
-
+            setNovaLatitude(user.endereco.latitude)
+            setNovaLongitude(user.endereco.longitude)
             setNumero(user.endereco.numero)
             setRua(user.endereco.rua)
             setBairro(user.endereco.bairro)
             setComplemento(user.endereco.complemento)
         }
     }, [user])
-
-    console.log(rua)
 
     async function atualizarPerfil() {
         const res = await fetch('/api/user', {
@@ -144,8 +147,8 @@ export default function MeuPerfil() {
                     numero,
                     bairro,
                     complemento,
-                    latitude,
-                    longitude
+                    latitude: novaLatitude,
+                    longitude: novaLongitude
                 }
             })
         })
@@ -156,7 +159,6 @@ export default function MeuPerfil() {
             alert(data.error)
             return
         }
-        alert('Perfil atualizado!')
     }
 
     return (
@@ -227,24 +229,62 @@ export default function MeuPerfil() {
                     </div>
                     <div className="md:grid md:grid-cols-2 md:gap-6">
                         <div className="w-full rounded-xl overflow-hidden">
-                            <MapSelector
-                                lat={latitude}
-                                lng={longitude}
-                                onChange={(novaLat, novaLng) => {
-                                    setNovaLatitude(novaLat)
-                                    setNovaLongitude(novaLng)
-                                }}
-                            />
+                            {
+                                latitude && longitude ? (
+                                    <MapSelector
+                                        lat={latitude}
+                                        lng={longitude}
+                                        onChange={(novaLat, novaLng) => {
+                                            setNovaLatitude(novaLat)
+                                            setNovaLongitude(novaLng)
+                                        }}
+                                    />
+                                ) : ('')
+                            }
                         </div>
                         <div className="flex flex-col gap-2">
                             <input type="text" name="rua" id="rua" className="border border-zinc-500 w-full p-2 rounded-md" value={rua} onChange={(e) => setRua(e.target.value)} />
                             <input type="text" name="numero" id="numero" className="border border-zinc-500 w-full p-2 rounded-md" value={numero} onChange={(e) => setNumero(e.target.value)} />
                             <input type="text" name="bairro" id="bairro" className="border border-zinc-500 w-full p-2 rounded-md" value={bairro} onChange={(e) => setBairro(e.target.value)} />
                             <input type="text" name="complemento" id="complemento" className="border border-zinc-500 w-full p-2 rounded-md" value={complemento} onChange={(e) => setComplemento(e.target.value)} />
-                            <input type="text" name="novaLatitude" id="novaLatitude" className="border border-zinc-500 w-full p-2 rounded-md" value={novaLatitude} onChange={(e) => setNovaLatitude(parseFloat(e.target.value))} />
-                            <input type="text" name="novaLongitude" id="novaLongitude" className="border border-zinc-500 w-full p-2 rounded-md" value={novaLongitude} onChange={(e) => setNovaLongitude(parseFloat(e.target.value))} />
-                            <button className={`bg-verde w-full font-bebas text-2xl pt-2 pb-1 rounded-xl ${user?.endereco.rua != rua || user?.endereco.numero != numero || user?.endereco.bairro != bairro || user?.endereco.complemento != complemento ? 'opacity-100' : 'opacity-45'}`} onClick={atualizarPerfil}>Atualizar Endereço</button>
+                            <input type="text" name="novaLatitude" id="novaLatitude" className="border border-zinc-500 w-full p-2 rounded-md" value={novaLatitude ?? ''} onChange={(e) => setNovaLatitude(parseFloat(e.target.value))} />
+                            <input type="text" name="novaLongitude" id="novaLongitude" className="border border-zinc-500 w-full p-2 rounded-md" value={novaLongitude ?? ''} onChange={(e) => setNovaLongitude(parseFloat(e.target.value))} />
+                            <button
+                                type="button"
+                                className={`
+                                        bg-verde
+                                        w-full
+                                        font-bebas
+                                        text-2xl
+                                        pt-2
+                                        pb-1
+                                        rounded-xl
+                                        ${user?.endereco.rua !== rua ||
+                                        user?.endereco.numero !== numero ||
+                                        user?.endereco.bairro !== bairro ||
+                                        user?.endereco.complemento !== complemento ||
+                                        user?.endereco.latitude !== novaLatitude ||
+                                        user?.endereco.longitude !== novaLongitude
+                                        ? 'opacity-100'
+                                        : 'opacity-45'
+                                    }
+                                `}
+                                onClick={() => setDialogConfirmarAlteracao(true)}
+                            >
+                                Atualizar Endereço
+                            </button>
                         </div>
+                        <Dialog
+                            open={dialogConfirmarAlteracao}
+                            onClose={() => setDialogConfirmarAlteracao(false)}
+                            onConfirm={() => {
+                                atualizarPerfil()
+                                setDialogConfirmarAlteracao(false)
+                            }}
+                            title="Confirmar alteração"
+                            description="Tem certeza que deseja atualizar seu endereço?"
+                            confirmText="Atualizar"
+                        />
                     </div>
                 </div>
             </div>

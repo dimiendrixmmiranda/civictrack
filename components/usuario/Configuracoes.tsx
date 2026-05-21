@@ -3,7 +3,7 @@ import { FaEyeSlash, FaMoon, FaRegBell, FaRegStar, FaSun, FaTv } from "react-ico
 import { GoGear, GoShieldCheck } from "react-icons/go";
 import { IoChatboxEllipsesOutline, IoMailUnreadOutline, IoShieldCheckmarkSharp } from "react-icons/io5";
 import Switch from "../switch/Switch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CgBrowser } from "react-icons/cg";
 import { GiPadlockOpen } from "react-icons/gi";
 import { SlGraph } from "react-icons/sl";
@@ -13,7 +13,7 @@ import { FaRegTrashCan } from "react-icons/fa6";
 
 export default function Configuracoes() {
     const [tema, setTema] = useState<'escuro' | 'claro'>('escuro')
-
+    const [loaded, setLoaded] = useState(false)
     const [emailNotificacao, setEmailNotificacao] = useState(true)
     const [navegador, setNavegador] = useState(true)
     const [denunciasProximas, setDenunciasProximas] = useState(true)
@@ -24,6 +24,56 @@ export default function Configuracoes() {
 
     const [idioma, setIdioma] = useState<'portugues' | 'ingles'>('portugues')
     const [segurancaConta, setSeguracaConta] = useState(true)
+
+
+    useEffect(() => {
+        const configuracoesSalvas = localStorage.getItem('configuracoes')
+        if (configuracoesSalvas) {
+            const config = JSON.parse(configuracoesSalvas)
+            setTema(config.tema || 'escuro')
+            setEmailNotificacao(config.emailNotificacao ?? true)
+            setNavegador(config.navegador ?? true)
+            setDenunciasProximas(config.denunciasProximas ?? true)
+            setAtualizacaoStatus(config.atualizacaoStatus ?? true)
+            setPerfilPublico(config.perfilPublico ?? true)
+            setLocalizacaoAproximada(config.localizacaoAproximada ?? true)
+            setIdioma(config.idioma || 'portugues')
+            setSeguracaConta(config.segurancaConta ?? true)
+        }
+
+        setLoaded(true)
+
+    }, [])
+
+    useEffect(() => {
+        if (!loaded) return
+        localStorage.setItem(
+            'configuracoes',
+            JSON.stringify({
+                tema,
+                emailNotificacao,
+                navegador,
+                denunciasProximas,
+                atualizacaoStatus,
+                perfilPublico,
+                localizacaoAproximada,
+                idioma,
+                segurancaConta
+            })
+        )
+
+    }, [
+        loaded,
+        tema,
+        emailNotificacao,
+        navegador,
+        denunciasProximas,
+        atualizacaoStatus,
+        perfilPublico,
+        localizacaoAproximada,
+        idioma,
+        segurancaConta
+    ])
 
     const gerarCampo = (
         icone: React.ReactNode,

@@ -69,21 +69,21 @@ export default function Rodape() {
                             </li>
 
                             <li>
-                                <Link href={'/'} className="flex items-center gap-2">
+                                <Link href={'/sobre'} className="flex items-center gap-2">
                                     <FiInfo />
                                     <p>Sobre</p>
                                 </Link>
                             </li>
 
                             <li>
-                                <Link href={'/'} className="flex items-center gap-2">
+                                <Link href={'/denuncias'} className="flex items-center gap-2">
                                     <FiAlertTriangle />
                                     <p>Denúncias</p>
                                 </Link>
                             </li>
 
                             <li>
-                                <Link href={'/'} className="flex items-center gap-2">
+                                <Link href={'/contato'} className="flex items-center gap-2">
                                     <FiMail />
                                     <p>Contato</p>
                                 </Link>
@@ -97,42 +97,42 @@ export default function Rodape() {
                         </div>
                         <ul className="flex flex-col gap-2">
                             <li>
-                                <Link href={'/'} className="flex items-center gap-2">
+                                <Link href={'/usuario'} className="flex items-center gap-2">
                                     <FiUser />
                                     <p>Meu perfil</p>
                                 </Link>
                             </li>
 
                             <li>
-                                <Link href={'/'} className="flex items-center gap-2">
+                                <Link href={'/usuario'} className="flex items-center gap-2">
                                     <FiAlertCircle />
                                     <p>Minhas Denúncias</p>
                                 </Link>
                             </li>
 
                             <li>
-                                <Link href={'/'} className="flex items-center gap-2">
+                                <Link href={'/usuario'} className="flex items-center gap-2">
                                     <FiHeart />
                                     <p>Favoritos</p>
                                 </Link>
                             </li>
 
                             <li>
-                                <Link href={'/'} className="flex items-center gap-2">
+                                <Link href={'/usuario'} className="flex items-center gap-2">
                                     <FiBell />
                                     <p>Notificações</p>
                                 </Link>
                             </li>
 
                             <li>
-                                <Link href={'/'} className="flex items-center gap-2">
+                                <Link href={'/usuario'} className="flex items-center gap-2">
                                     <FiSettings />
                                     <p>Configurações</p>
                                 </Link>
                             </li>
 
                             <li>
-                                <Link href={'/'} className="flex items-center gap-2">
+                                <Link href={'/usuario'} className="flex items-center gap-2">
                                     <FiLogOut />
                                     <p>Sair</p>
                                 </Link>
