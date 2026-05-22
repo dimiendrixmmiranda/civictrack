@@ -1,4 +1,5 @@
 'use client'
+import Dialog from "@/components/caixaDeDialogo/CaixaDeDialogo";
 import Grafico from "@/components/grafico/Grafico";
 import TabelaDeProblemas from "@/components/tabelaDeProblemas/TabelaDeProblemas";
 import Template from "@/components/template/Template";
@@ -32,6 +33,7 @@ export default function Page() {
     } = useNotifications()
     const [active, setActive] = useState<'painel' | 'minhas-denuncias' | 'nova-denuncia' | 'notificacoes' | 'meu-perfil' | 'configuracoes' | 'sair'>('painel')
     const [notificacoesNaoLidas, setNotificacoesNaoLidas] = useState<number>(0)
+    const [abrirLogout, setAbrirLogout] = useState(false)
     
     useEffect(() => {
         const notNaoLidas = notifications.filter(not => not.read === false).length
@@ -173,8 +175,8 @@ export default function Page() {
                     </div>
                 ) : ''
             }
-            <div className="bg-black 2xl:grid 2xl:grid-cols-[300px_1fr]">
-                <div className="w-full bg-cinza p-4 flex flex-col gap-6 hidden border-r-2 border-zinc-600 2xl:block">
+            <div className="bg-cinza 2xl:grid 2xl:grid-cols-[300px_1fr]">
+                <div className="w-full p-4 flex flex-col gap-6 border-r-2 border-zinc-600 2xl:block">
                     <div className="grid grid-cols-[80px_1fr] gap-4">
                         <div className="relative w-[80px] h-[80px] rounded-full overflow-hidden bg-green-500 border-2 border-black">
                             <Image alt="Imagem do usuário" src={user.imagem} fill unoptimized className="object-cover" />
@@ -221,13 +223,27 @@ export default function Page() {
                                 <span>Configurações</span>
                             </li>
 
-                            <li onClick={(e) => {
-                                setActive('sair')
-                                fazerLogout()
-                            }} className={`flex items-center gap-2 p-2 rounded-xl cursor-pointer hover:bg-red-900 hover:text-white duration-500 transition-all ${active === 'sair' ? 'bg-red-900 text-white' : 'text-zinc-400'}`}>
+                            <li
+                                onClick={() => setAbrirLogout(true)}
+                                className={`flex items-center gap-2 p-2 rounded-xl cursor-pointer hover:bg-red-900 hover:text-white duration-500 transition-all ${active === 'sair'
+                                    ? 'bg-red-900 text-white'
+                                    : 'text-zinc-400'
+                                    }`}
+                            >
                                 <FiLogOut className="text-red-500" />
                                 <span>Sair</span>
                             </li>
+                            <Dialog
+                                open={abrirLogout}
+                                onClose={() => setAbrirLogout(false)}
+                                onConfirm={async () => {
+                                    await fazerLogout()
+                                    setAbrirLogout(false)
+                                }}
+                                title="Deseja realmente sair?"
+                                description="Você será desconectado da sua conta."
+                                confirmText="Sair"
+                            />
                         </ul>
                     </div>
                     <div className="border-2 border-zinc-600 rounded-xl p-4 mt-4">

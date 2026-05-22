@@ -58,8 +58,8 @@ export default function Notificacoes() {
                                         )
                                     })
                                 ) : (
-                                    <div>
-                                        aqui
+                                    <div className="flex justify-center items-center w-full h-full">
+                                        <h2 className="font-bebas text-2xl text-center">Nenhuma notificação disponivel!</h2>
                                     </div>
                                 )
                             }

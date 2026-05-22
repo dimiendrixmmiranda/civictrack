@@ -10,8 +10,18 @@ export async function POST(req: Request) {
         where: { email }
     })
 
+    if (user?.deleted) {
+        return Response.json(
+            { error: "Conta Excluida" },
+            { status: 401 }
+        )
+    }
+
     if (!user) {
-        return Response.json({ error: "Credenciais inválidas" }, { status: 401 })
+        return Response.json(
+            { error: "Credenciais inválidas" },
+            { status: 401 }
+        )
     }
 
     const isValid = await bcrypt.compare(password, user.password)

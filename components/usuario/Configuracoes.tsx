@@ -10,8 +10,11 @@ import { SlGraph } from "react-icons/sl";
 import { BiWorld } from "react-icons/bi";
 import { IoIosArrowForward, IoIosCodeDownload } from "react-icons/io";
 import { FaRegTrashCan } from "react-icons/fa6";
+import Dialog from "../caixaDeDialogo/CaixaDeDialogo";
+import { useRouter } from "next/navigation"
 
 export default function Configuracoes() {
+    const router = useRouter()
     const [tema, setTema] = useState<'escuro' | 'claro'>('escuro')
     const [loaded, setLoaded] = useState(false)
     const [emailNotificacao, setEmailNotificacao] = useState(true)
@@ -25,6 +28,7 @@ export default function Configuracoes() {
     const [idioma, setIdioma] = useState<'portugues' | 'ingles'>('portugues')
     const [segurancaConta, setSeguracaConta] = useState(true)
 
+    const [abrirExcluirConta, setAbrirExcluirConta] = useState(false)
 
     useEffect(() => {
         const configuracoesSalvas = localStorage.getItem('configuracoes')
@@ -113,6 +117,25 @@ export default function Configuracoes() {
         )
     }
 
+    async function excluirConta() {
+        try {
+            const res = await fetch(
+                "/api/user/delete",
+                {
+                    method: "PATCH"
+                }
+            )
+            const data = await res.json()
+            if (!res.ok) {
+                alert(data.error)
+                return
+            }
+            window.location.href = "/login"
+        } catch (error) {
+            console.error(error)
+            alert("Erro ao excluir conta")
+        }
+    }
     return (
         <div className="bg-cinza xl:pl-8">
             <div className="p-4 min-h-full flex flex-col gap-6">
@@ -138,13 +161,13 @@ export default function Configuracoes() {
                                 <h3 className="font-bebas text-2xl">Tema</h3>
                                 <p>Escolha o tema que mais combina com você</p>
                             </div>
-                            <div className="grid grid-cols-2">
-                                <div onClick={() => setTema('escuro')} className={`cursor-pointer flex flex-col justify-center items-center bg-cinza-2 p-4 w-full h-[130px] mx-auto rounded-lg ${tema == 'escuro' ? 'border-2 border-verde' : ''}`}>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div onClick={() => setTema('escuro')} className={`cursor-pointer flex flex-col justify-center items-center bg-cinza-2 p-4 w-full h-[130px] mx-auto rounded-lg ${tema == 'escuro' ? 'border-2 border-verde bg-verde-claro text-shadow-[1px_1px_2px_black]' : ''}`}>
                                     <FaMoon className="text-5xl" />
                                     <h4 className="font-bold text-xl">Escuro</h4>
                                     <span className="text-sm">Tema escuro</span>
                                 </div>
-                                <div onClick={() => setTema('claro')} className={`cursor-pointer flex flex-col justify-center items-center bg-cinza-2 p-4 w-full h-[130px] mx-auto rounded-lg ${tema == 'claro' ? 'border-2 border-verde' : ''}`}>
+                                <div onClick={() => setTema('claro')} className={`cursor-pointer flex flex-col justify-center items-center bg-cinza-2 p-4 w-full h-[130px] mx-auto rounded-lg ${tema == 'claro' ? 'border-2 border-verde bg-verde-claro text-shadow-[1px_1px_2px_black]' : ''}`}>
                                     <FaSun className="text-5xl" />
                                     <h4 className="font-bold text-xl">Claro</h4>
                                     <span className="text-sm">Tema claro</span>
@@ -302,8 +325,19 @@ export default function Configuracoes() {
                                         </div>
                                     </div>
                                     <div>
-                                        <button className="text-red-600 border border-red-500 px-2 py-1 rounded-md hover:bg-red-500 hover:text-white transition-all duration-300">Excluir conta</button>
+                                        <button onClick={() => setAbrirExcluirConta(true)} className="text-red-600 border border-red-500 px-2 py-1 rounded-md hover:bg-red-500 hover:text-white transition-all duration-300">Excluir conta</button>
                                     </div>
+                                    <Dialog
+                                        open={abrirExcluirConta}
+                                        onClose={() => setAbrirExcluirConta(false)}
+                                        onConfirm={async () => {
+                                            await excluirConta()
+                                            setAbrirExcluirConta(false)
+                                        }}
+                                        title="Deseja realmente excluir sua conta?"
+                                        description="Essa ação não poderá ser desfeita!"
+                                        confirmText="Excluir"
+                                    />
                                 </div>
                             </div>
                         </div>

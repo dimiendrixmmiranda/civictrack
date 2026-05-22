@@ -15,7 +15,7 @@ export default function TabelaDeProblemas({ denuncias, qtdeDeLinhas, altura }: T
 
     return (
         <section className="col-start-1 col-end-2">
-            <div className="bg-cinza p-4 flex flex-col gap-4 rounded-xl overflow-hidden">
+            <div className="bg-cinza-2 p-4 flex flex-col gap-4 rounded-xl overflow-hidden">
                 <div className="flex justify-between items-center">
                     <h2 className="font-bebas text-2xl">Problemas recentes</h2>
                     <Link href={'/'} className="flex items-center gap-1 bg-azul-escuro p-1 rounded-full md:py-2 md:px-4">

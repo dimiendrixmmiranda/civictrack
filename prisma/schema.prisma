@@ -30,6 +30,8 @@ model User {
   telefone   String
   imagem     String
 
+  deleted   Boolean  @default(false)
+
   endereco   Endereco? @relation(fields: [enderecoId], references: [id])
   enderecoId String?   @unique
 
@@ -83,6 +85,8 @@ model Denuncia {
 
   enderecoId       String
   endereco         Endereco @relation(fields: [enderecoId], references: [id])
+
+  pessoasImpactadas Int?
 }
 
 model Notification {

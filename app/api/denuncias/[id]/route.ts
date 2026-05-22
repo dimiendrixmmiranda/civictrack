@@ -111,7 +111,8 @@ export async function PATCH(
             risco,
             prioridade,
             status,
-            custo
+            custo,
+            pessoasImpactadas
         } = body
 
         const { id } = await params
@@ -129,7 +130,10 @@ export async function PATCH(
 
                 ...(custo !== undefined && {
                     custo
-                })
+                }),
+                ...(pessoasImpactadas !== undefined && {
+                    pessoasImpactadas
+                }),
             },
 
             include: {

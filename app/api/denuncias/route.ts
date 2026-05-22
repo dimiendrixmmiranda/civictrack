@@ -38,7 +38,7 @@ export async function POST(req: Request) {
             prioridade,
             imagem,
             custo,
-
+            pessoasImpactadas,
             endereco
         } = body
 
@@ -82,7 +82,8 @@ export async function POST(req: Request) {
                     connect: {
                         id: enderecoCriado.id
                     }
-                }
+                },
+                pessoasImpactadas
             },
 
             include: {

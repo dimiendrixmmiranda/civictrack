@@ -8,12 +8,38 @@ import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/hooks/useUser";
 import { useMinhasDenuncias } from "@/hooks/useDenunciasMe";
+import { useEffect, useState } from "react";
 
 export default function Painel() {
     const router = useRouter()
     const { user, loading } = useUser()
     const { denuncias } = useMinhasDenuncias()
+    const [qtdeProblemasResolvidos, setQtdeProblemasResolvidos] = useState<number | null>(null)
+    const [qtdePessoasImpactadas, setPessoasImpactadas] = useState<number | null>(null)
 
+
+    useEffect(() => {
+        const problemasResolvidos = denuncias.filter(denuncia => denuncia.status === 'resolvido')
+        const pessoasImpactadas = denuncias
+            .filter((denuncia) => denuncia.status === "resolvido")
+            .reduce(
+                (total, denuncia) =>
+                    total + (denuncia.pessoasImpactadas || 0),
+                0
+            )
+        if (problemasResolvidos) {
+            setQtdeProblemasResolvidos(problemasResolvidos.length)
+        } else {
+            setQtdeProblemasResolvidos(0)
+        }
+        if (pessoasImpactadas) {
+            setPessoasImpactadas(pessoasImpactadas)
+        } else {
+            setPessoasImpactadas(0)
+        }
+    }, [denuncias])
+
+    console.log(denuncias)
     const denunciasDoMes = denuncias.filter((denuncia) => {
 
         const dataDenuncia = new Date(denuncia.createdAt)
@@ -100,7 +126,7 @@ export default function Painel() {
     })
     return (
         <div className="flex flex-col gap-6 m-4 2xl:h-[700px] 2xl:overflow-y-scroll barra 2xl:pr-4">
-            <div className="md:grid md:grid-cols-2 bg-cinza p-2 rounded-xl lg:grid-cols-[auto_1fr] xl:px-6">
+            <div className="bg-cinza-2 md:grid md:grid-cols-2 bg-cinza p-2 rounded-xl lg:grid-cols-[auto_1fr] xl:px-6">
                 <div className="grid grid-cols-[60px_1fr] items-center gap-3 xl:grid-cols-[100px_1fr]">
                     <div className="relative w-[60px] h-[60px] rounded-full bg-zinc-500 overflow-hidden xl:w-[100px] xl:h-[100px]">
                         <Image alt="Imagem do Usuário" src={user.imagem || '/cidade/cidade.jpg'} unoptimized fill className="object-cover" />
@@ -178,7 +204,7 @@ export default function Painel() {
                 <div className="flex flex-col gap-4">
                     <Grafico categorias={categorias} />
                     <div className="flex flex-col w-full gap-6 md:grid md:grid-cols-2">
-                        <div className="p-4 bg-cinza w-full col-span-2 rounded-xl flex flex-col gap-4">
+                        <div className="bg-cinza-2 p-4 w-full col-span-2 rounded-xl flex flex-col gap-4">
                             <div className="flex flex-col">
                                 <h3 className="font-bebas text-3xl">Impacto das suas denúncias</h3>
                                 <p>Você ja ajudou a melhorar sua cidade!</p>
@@ -190,7 +216,7 @@ export default function Painel() {
                                     </div>
                                     <div className="flex flex-col gap-1">
                                         <p className="text-zinc-400 leading-4 text-sm">Pessoas Impactadas</p>
-                                        <h4 className="font-bebas text-4xl">1250+</h4>
+                                        <h4 className="font-bebas text-4xl">{qtdePessoasImpactadas}+</h4>
                                     </div>
                                 </div>
                                 <div className="grid grid-cols-[64px_1fr] gap-2">
@@ -199,7 +225,7 @@ export default function Painel() {
                                     </div>
                                     <div className="flex flex-col gap-1">
                                         <p className="text-zinc-400 leading-4 text-sm">Problemas resolvidos</p>
-                                        <h4 className="font-bebas text-4xl">5</h4>
+                                        <h4 className="font-bebas text-4xl">{qtdeProblemasResolvidos}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -207,7 +233,7 @@ export default function Painel() {
                     </div>
                 </div>
             </div>
-            <div className="col-span-3 bg-cinza rounded-xl p-4 grid grid-cols-[64px_1fr] gap-4 lg:grid-cols-[64px_auto_1fr]">
+            <div className="col-span-3 bg-cinza-2 rounded-xl p-4 grid grid-cols-[64px_1fr] gap-4 lg:grid-cols-[64px_auto_1fr]">
                 <div className="w-16 h-16 relative rounded-full bg-green-900 flex justify-center items-center">
                     <FaHeart className="text-green-400 text-2xl" />
                 </div>

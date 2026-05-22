@@ -10,7 +10,7 @@ import { IoMailSharp } from "react-icons/io5";
 export default function Rodape() {
     const [email, setEmail] = useState('')
     return (
-        <footer className="bg-cinza">
+        <footer className="bg-cinza border-t-2 border-zinc-600">
             <div className="max-w-[1440px] mx-auto p-4 flex flex-col gap-8 md:p-8 lg:grid lg:grid-cols-[300px_1fr]">
                 <div className="flex flex-col gap-4">
                     <Link href={'/'} className="flex items-center gap-1">

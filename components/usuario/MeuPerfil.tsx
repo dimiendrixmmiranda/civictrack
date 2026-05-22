@@ -6,6 +6,7 @@ import dynamic from "next/dynamic"
 import Image from "next/image"
 import { GrUpdate } from "react-icons/gr"
 import Dialog from "../caixaDeDialogo/CaixaDeDialogo"
+import { useDenuncias } from "@/hooks/useDenuncias"
 
 const MapSelector = dynamic(
     () => import("@/components/mapSelector/MapSelector"),
@@ -35,7 +36,6 @@ export default function MeuPerfil() {
     const inputImageRef = useRef<HTMLInputElement>(null)
 
     const [dialogConfirmarAlteracao, setDialogConfirmarAlteracao] = useState(false)
-
 
     async function handleUploadImagem(
         e: React.ChangeEvent<HTMLInputElement>

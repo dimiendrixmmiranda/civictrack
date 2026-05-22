@@ -11,7 +11,7 @@ export default function Page() {
     const { denuncias } = useDenuncias()
 
     const [listaDenuncias, setListaDenuncias] = useState(denuncias)
-    const [custo, setCusto] = useState('')
+
     useEffect(() => {
         setListaDenuncias(denuncias)
     }, [denuncias])
@@ -28,6 +28,9 @@ export default function Page() {
     const [abrirCustoId, setAbrirCustoId] = useState<string | null>(null)
 
     const [selecionarCusto, setSelecionarCusto] = useState("")
+
+    const [abrirPessoasId, setAbrirPessoasId] = useState<string | null>(null)
+    const [selecionarPessoasImpactadas, setSelecionarPessoasImpactadas] = useState<string>("")
 
     async function handleUpdateRisco(
         denunciaId: string,
@@ -184,6 +187,59 @@ export default function Page() {
             alert("Erro ao atualizar")
         }
     }
+    async function handleUpdatePessoasImpactadas(
+        denunciaId: string,
+        pessoasImpactadas: number
+    ) {
+
+        try {
+
+            const res = await fetch(
+                `/api/denuncias/${denunciaId}`,
+                {
+                    method: "PATCH",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        pessoasImpactadas
+                    })
+                }
+            )
+
+            const data = await res.json()
+
+            setListaDenuncias((prev) =>
+                prev.map((item) =>
+                    item.id === denunciaId
+                        ? {
+                            ...item,
+                            pessoasImpactadas
+                        }
+                        : item
+                )
+            )
+
+            if (!res.ok) {
+
+                alert(data.error)
+
+                return
+            }
+
+            alert("Quantidade atualizada!")
+
+            setAbrirPessoasId(null)
+
+        } catch (error) {
+
+            console.error(error)
+
+            alert("Erro ao atualizar")
+        }
+    }
 
     async function handleUpdateCusto(
         denunciaId: string,
@@ -249,7 +305,7 @@ export default function Page() {
                         <div className="flex flex-col w-full">
                             <div className="
                             grid
-                            grid-cols-[40px_minmax(200px,1fr)_130px_130px_130px_130px_130px_200px_130px]
+                            grid-cols-[40px_minmax(200px,1fr)_130px_130px_130px_130px_130px_200px_130px_130px]
                             gap-3
                             border-y-2
                             border-zinc-700
@@ -280,6 +336,9 @@ export default function Page() {
                                 <div className="flex items-center">
                                     Custo
                                 </div>
+                                <div className="flex items-center">
+                                    Pessoas Impactadas
+                                </div>
                             </div>
 
                             {listaDenuncias.map((problema) => (
@@ -287,7 +346,7 @@ export default function Page() {
                                     key={problema.id}
                                     className="
                                     grid
-                                    grid-cols-[40px_minmax(200px,1fr)_130px_130px_130px_130px_130px_200px_130px]
+                                    grid-cols-[40px_minmax(200px,1fr)_130px_130px_130px_130px_130px_200px_130px_130px]
                                     gap-3
                                     py-3
                                     border-b
@@ -511,6 +570,62 @@ export default function Page() {
                                             ) : (
                                                 <div>
                                                     <h2 className="text-sm text-center">Problema não resolvido</h2>
+                                                </div>
+                                            )
+                                        }
+                                    </div>
+                                    <div className="flex items-center relative">
+
+                                        {
+                                            problema.pessoasImpactadas ?? 'Não definido'
+                                        }
+
+                                        <button
+                                            onClick={() => {
+
+                                                setAbrirPessoasId(
+                                                    abrirPessoasId === problema.id
+                                                        ? null
+                                                        : problema.id
+                                                )
+
+                                                setSelecionarPessoasImpactadas(
+                                                    problema.pessoasImpactadas?.toString() || ""
+                                                )
+                                            }}
+
+                                            className="absolute top-0 right-0 text-xs"
+                                        >
+                                            <TbTriangleInvertedFilled />
+                                        </button>
+
+                                        {
+                                            abrirPessoasId === problema.id && (
+
+                                                <div className="w-full bg-zinc-500 absolute top-0 left-0 p-2 z-10 flex flex-col gap-2">
+
+                                                    <input
+                                                        type="number"
+                                                        value={selecionarPessoasImpactadas}
+                                                        onChange={(e) =>
+                                                            setSelecionarPessoasImpactadas(e.target.value)
+                                                        }
+                                                        className="w-full text-black"
+                                                    />
+
+                                                    <button
+                                                        className="text-xs"
+
+                                                        onClick={() =>
+                                                            handleUpdatePessoasImpactadas(
+                                                                problema.id,
+                                                                Number(selecionarPessoasImpactadas)
+                                                            )
+                                                        }
+                                                    >
+                                                        Salvar Alteração
+                                                    </button>
+
                                                 </div>
                                             )
                                         }

@@ -2,7 +2,7 @@ import Endereco from "./Endereco"
 import User from "./user"
 
 export default interface Denuncia {
-    id:string
+    id: string
     categoria: string
     tipoDoProblema: string
     risco: string
@@ -16,4 +16,5 @@ export default interface Denuncia {
     user: User
     enderecoId: string
     endereco: Endereco
+    pessoasImpactadas: number
 }

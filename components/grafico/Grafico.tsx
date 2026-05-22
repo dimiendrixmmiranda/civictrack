@@ -28,7 +28,7 @@ export default function Grafico({ categorias }: GraficoProps) {
     const todosZerados = categorias.map(cat => cat.value).reduce((a, b) => a + b)
     console.log(todosZerados)
     return (
-        <div className="col-start-2 col-end-3 w-full h-[300px] flex flex-col bg-cinza rounded-xl p-4">
+        <div className="col-start-2 col-end-3 w-full h-[300px] flex flex-col bg-cinza-2 rounded-xl p-4">
             <h2 className="text-white font-bebas text-3xl">
                 Problemas por categoria
             </h2>
