@@ -37,9 +37,9 @@ export default function Notificacoes() {
                     <h2 className="font-bebas text-4xl">Notificações</h2>
                     <p>Acompanhe suas notificações e fique por dentro de tudo.</p>
                 </div>
-                <div className="flex flex-col gap-8 xl:grid xl:grid-cols-2 gap-4 2xl:gap-10">
+                <div className="flex flex-col gap-8 xl:grid xl:grid-cols-2 xl:min-h-[450px] gap-4 2xl:gap-10">
                     <div className="2xl:max-h-[500px] 2xl:overflow-y-scroll barra 2xl:pr-3">
-                        <ul className="flex flex-col gap-2">
+                        <ul className="flex flex-col gap-2 h-full">
                             {
                                 notifications.length > 0 ? (
                                     notifications.map(notificacao => {
@@ -59,7 +59,7 @@ export default function Notificacoes() {
                                     })
                                 ) : (
                                     <div className="flex justify-center items-center w-full h-full">
-                                        <h2 className="font-bebas text-2xl text-center">Nenhuma notificação disponivel!</h2>
+                                        <h2 className="font-bebas text-4xl text-center">Nenhuma notificação disponivel!</h2>
                                     </div>
                                 )
                             }
@@ -148,6 +148,7 @@ export default function Notificacoes() {
                                             deleteNotification(
                                                 notificaoSelecionada.id
                                             )
+                                            setNotificacaoSelecionada(null)
                                             setDialogExcluiNotificacao(false)
                                         }}
                                         title="Excluir notificação"

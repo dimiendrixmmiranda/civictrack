@@ -199,7 +199,7 @@ export default function Cabecalho() {
                             ">
                                 <Image
                                     alt="Imagem do usuario"
-                                    src={'/logo/logo.png'}
+                                    src={user.imagem}
                                     fill
                                     className="object-contain"
                                 />
@@ -232,7 +232,7 @@ export default function Cabecalho() {
                                     items-center
                                     p-2
                                     rounded-md
-                                    bg-azul-claro
+                                    bg-cinza
                                     transition-all
                                     hover:bg-verde
                                 "
@@ -257,9 +257,9 @@ export default function Cabecalho() {
                                     items-center
                                     p-2
                                     rounded-md
-                                    bg-azul-claro
+                                    bg-cinza
                                     transition-all
-                                    hover:bg-verde
+                                    hover:bg-azul-claro
                                 "
                                 style={{ textShadow: '1px 1px 2px black' }}
                             >

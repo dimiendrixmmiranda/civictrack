@@ -1,7 +1,5 @@
 'use client'
 import Dialog from "@/components/caixaDeDialogo/CaixaDeDialogo";
-import Grafico from "@/components/grafico/Grafico";
-import TabelaDeProblemas from "@/components/tabelaDeProblemas/TabelaDeProblemas";
 import Template from "@/components/template/Template";
 import Configuracoes from "@/components/usuario/Configuracoes";
 import MeuPerfil from "@/components/usuario/MeuPerfil";
@@ -9,7 +7,6 @@ import MinhasDenuncias from "@/components/usuario/MinhasDenuncias";
 import Notificacoes from "@/components/usuario/Notificacoes";
 import NovaDenuncia from "@/components/usuario/NovaDenuncia";
 import Painel from "@/components/usuario/Painel";
-import { useDenuncias } from "@/hooks/useDenuncias";
 import { useMinhasDenuncias } from "@/hooks/useDenunciasMe";
 import { useNotifications } from "@/hooks/useNotificacoes";
 import { useUser } from "@/hooks/useUser";
@@ -17,10 +14,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { BsBox2HeartFill } from "react-icons/bs";
-import { FaCheckDouble, FaClipboardList, FaExclamationTriangle, FaHeart, FaLeaf, FaPlusCircle } from "react-icons/fa";
+import { FaPlusCircle } from "react-icons/fa";
 import { FiAlertCircle, FiBell, FiGrid, FiLogOut, FiPlusCircle, FiSettings, FiUser } from "react-icons/fi";
-import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { TbLayoutDashboard } from "react-icons/tb";
 
 export default function Page() {
@@ -34,7 +29,7 @@ export default function Page() {
     const [active, setActive] = useState<'painel' | 'minhas-denuncias' | 'nova-denuncia' | 'notificacoes' | 'meu-perfil' | 'configuracoes' | 'sair'>('painel')
     const [notificacoesNaoLidas, setNotificacoesNaoLidas] = useState<number>(0)
     const [abrirLogout, setAbrirLogout] = useState(false)
-    
+
     useEffect(() => {
         const notNaoLidas = notifications.filter(not => not.read === false).length
         if (notNaoLidas) setNotificacoesNaoLidas(notNaoLidas)
@@ -74,24 +69,6 @@ export default function Page() {
         )
     })
 
-    const precoDasDenunciasResolvidas = denuncias
-        .filter(
-            d =>
-                d.status === 'resolvido' &&
-                d.custo !== '' &&
-                d.custo != null
-        )
-        .reduce((total, denuncia) => {
-            return total + parseFloat(denuncia.custo)
-        }, 0)
-
-
-    console.log(user)
-
-    if (loading) return <p>Carregando...</p>
-
-    if (!user) return <p>Não logado</p>
-
     async function fazerLogout() {
         await fetch("/api/logout", {
             method: "POST"
@@ -129,38 +106,36 @@ export default function Page() {
                 return (
                     <Painel />
                 )
-                break;
             case 'minhas-denuncias':
                 return (
                     <MinhasDenuncias />
                 )
-                break;
             case 'nova-denuncia':
                 return (
                     <NovaDenuncia />
                 )
-                break;
             case 'notificacoes':
                 return (
                     <Notificacoes />
                 )
-                break;
             case 'meu-perfil':
                 return (
                     <MeuPerfil />
                 )
-                break;
             case 'configuracoes':
                 return (
                     <Configuracoes />
                 )
-                break;
-
             default:
                 break;
         }
     }
 
+    if (loading) return <div className="min-w-full min-h-screen flex justify-center items-center bg-cinza">
+        <h2 className="text-4xl font-bebas">Carregando</h2>
+    </div>
+    if (!user) return <p>Não logado</p>
+    
     return (
         <Template>
             {

@@ -11,6 +11,16 @@ import { IoFilterSharp } from "react-icons/io5";
 import { MdDateRange, MdOutlinePerson2, MdReportProblem } from "react-icons/md";
 import { TbChartInfographic } from "react-icons/tb";
 
+import dynamic from "next/dynamic"
+import Link from "next/link";
+
+const MapProblems = dynamic(
+    () => import("@/components/mapProblems/MapProblems"),
+    {
+        ssr: false
+    }
+)
+
 export default function Page() {
     const [busca, setBusca] = useState('')
     const [categoria, setCategoria] = useState('')
@@ -20,10 +30,32 @@ export default function Page() {
 
     const [active, setActive] = useState<'todas-as-denuncias' | 'minhas-denuncias' | 'favoritos' | 'acompanhar' | 'estatisticas'>('todas-as-denuncias')
 
+    const categoriasFixas = [
+        "infraestrutura",
+        "iluminacao",
+        "limpeza",
+        "meio-ambiente",
+        "drenagem",
+        "seguranca",
+        "outros",
+    ]
+
+    const categorias = categoriasFixas.map((categoria) => {
+
+        const quantidade = denuncias.filter(
+            denuncia => denuncia.categoria === categoria
+        ).length
+
+        return {
+            name: categoria,
+            value: quantidade
+        }
+    })
+
     return (
         <Template>
-            <div className="bg-cinza min-h-screen p-4 2xl:p-8">
-                <div className="flex flex-col xl:grid xl:grid-cols-[200px_1fr_300px] xl:gap-8 2xl:grid-cols-[300px_1fr_400px]">
+            <div className="bg-cinza min-h-screen p-4 2xl:p-8 ">
+                <div className="flex flex-col xl:grid xl:grid-cols-[200px_auto_1fr] xl:gap-8 2xl:grid-cols-[300px_1fr_350px]">
                     <div className="flex-1 flex flex-col gap-4">
                         <ul className="flex flex-col gap-1">
                             <li onClick={(e) => setActive('todas-as-denuncias')} className={`flex items-center gap-2 p-2 rounded-xl hover:bg-green-900 cursor-pointer hover:text-white duration-500 transition-all ${active === 'todas-as-denuncias' ? 'bg-green-900 text-white' : 'text-zinc-400'}`}>
@@ -108,7 +140,7 @@ export default function Page() {
                             </button>
                         </div>
                         <div>
-                            <ul className="flex flex-col gap-4">
+                            <ul className="flex flex-col gap-4 xl:min-h-[920px] 2xl:min-h-[780px]">
                                 {
                                     denuncias.map((denuncia => {
                                         return (
@@ -163,11 +195,11 @@ export default function Page() {
                             </ul>
                         </div>
                     </div>
-                    <div>
-                        <div className="bg-cinza-2 p-4 rounded-xl">
+                    <div className="flex flex-col gap-4 w-full">
+                        <div className="bg-cinza-2 p-4 rounded-xl flex flex-col gap-2 w-full">
                             <h3 className="font-bebas text-2xl">Resumo</h3>
                             <div>
-                                <ul className="2xl:grid 2xl:grid-cols-2 2xl:gap-4">
+                                <ul className="xl:flex xl:flex-col xl:gap-2 2xl:grid 2xl:grid-cols-2 2xl:gap-4">
                                     <li className="flex gap-2 justify-center items-center bg-cinza p-2 rounded-xl">
                                         <div className="text-verde">
                                             <AiFillContainer className="text-5xl" />
@@ -207,8 +239,52 @@ export default function Page() {
                                 </ul>
                             </div>
                         </div>
-                        <div className="bg-cinza-2 p-4 rounded-xl">
+                        <div className="bg-cinza-2 p-4 rounded-xl flex flex-col gap-2">
                             <h3 className="font-bebas text-2xl">Categorias</h3>
+                            <div className="flex-col gap-2 my-auto flex">
+                                <div className="flex flex-col capitalize gap-1">
+                                    {
+                                        categorias.map((cat, i) => {
+                                            return (
+                                                <div className="flex items-center justify-between" key={i}>
+                                                    <div className="flex items-center gap-2">
+                                                        <div className="relative w-8 h-8">
+                                                            <Image alt={`${cat.name}`} src={`/categorias/${cat.name}.png`} fill className="object-cover" />
+                                                        </div>
+                                                        <p className="text-sm">{cat.name}</p>
+                                                    </div>
+                                                    <span>{cat.value}</span>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div className="bg-cinza-2 p-4 rounded-xl flex flex-col gap-2">
+                            <h3 className="font-bebas text-2xl">Mapa Rápido</h3>
+                            <div className="w-full h-[260px] bg-zinc-600 rounded-md overflow-hidden">
+                                <MapProblems
+                                    problemas={denuncias.filter(d => d.status == 'aberto' || d.status === 'em-andamento').map((d) => ({
+
+                                        id: d.id,
+
+                                        titulo: d.tipoDoProblema,
+
+                                        categoria: d.categoria,
+
+                                        risco: d.risco,
+
+                                        endereco: {
+                                            latitude: d.endereco.latitude,
+                                            longitude: d.endereco.longitude
+                                        },
+
+                                        tipoDoProblema: d.tipoDoProblema
+                                    }))}
+                                />
+                            </div>
+                            <Link href={'/'} className="bg-green-900 text-green-300 text-shadow-[1px_1px_2px_black] text-center p-2 rounded-xl">Ver no mapa completo</Link>
                         </div>
                     </div>
                 </div>

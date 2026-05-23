@@ -25,10 +25,10 @@ export default function TabelaDeProblemas({ denuncias, qtdeDeLinhas, altura }: T
                         </p>
                     </Link>
                 </div>
-                <div className={`overflow-x-auto ${altura} barraTabela`}>
+                <div className={`overflow-x-auto ${altura} barraTabela flex flex-col justify-center items-center`}>
                     {
                         denuncias.length > 0 ? (
-                            <div className="flex flex-col min-w-[1000px]">
+                            <div className="flex flex-col w-full h-full mb-auto">
                                 <div className="
                                     grid
                                     grid-cols-[40px_minmax(0,1fr)_80px]

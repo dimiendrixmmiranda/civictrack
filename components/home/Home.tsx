@@ -49,7 +49,7 @@ export default function Home() {
                             <TiPlus className="text-lg" />
                             <span>Criar Denúncia</span>
                         </Link>
-                        <Link href={'/'} className="bg-red-600 flex items-center justify-center font-bold gap-1 rounded-lg p-2 max-w-[200px] mx-auto w-full xl:mx-0" style={{ textShadow: '1px 1px 2px black', boxShadow: '0 0 1px 1px black' }}>
+                        <Link href={'/denuncias'} className="bg-red-600 flex items-center justify-center font-bold gap-1 rounded-lg p-2 max-w-[200px] mx-auto w-full xl:mx-0" style={{ textShadow: '1px 1px 2px black', boxShadow: '0 0 1px 1px black' }}>
                             <RiMenuFold2Fill className="text-lg" />
                             <span>Ver Detalhes</span>
                         </Link>
@@ -86,10 +86,10 @@ export default function Home() {
                 <div className="bg-azul-escuro p-4 max-w-[600px] h-fit my-auto flex flex-col gap-2">
                     <div className="flex justify-between">
                         <h3 className="font-bebas text-2xl">Mapa de problemas</h3>
-                        <div className="flex items-center gap-2 bg-red-700 px-2 rounded-md">
+                        <Link href={'/denuncias'} className="flex items-center gap-2 bg-red-700 px-2 rounded-md">
                             <p className="text-sm rounded-md">Ver mapa completo</p>
                             <HiInformationCircle />
-                        </div>
+                        </Link>
                     </div>
                     <div className="flex flex-col gap-2">
                         <div className="w-full h-[280px] bg-zinc-600 rounded-md overflow-hidden">
