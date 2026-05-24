@@ -23,6 +23,7 @@ export default function InputSenha({ id, textoLabel, senha, setSenha }: InputPro
                     name={id}
                     id={id}
                     value={senha}
+                    placeholder="******"
                     className="border rounded-md border-verde p-1.5 w-full pr-10"
                     onChange={(e) => setSenha(e.target.value)}
                 />

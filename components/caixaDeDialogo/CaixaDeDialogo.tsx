@@ -41,7 +41,7 @@ export default function Dialog({
                             items-center
                             p-4 text-white
                         "
-                        style={{zIndex: '9999'}}
+                        style={{ zIndex: '9999' }}
                     >
 
                         <motion.div
@@ -99,40 +99,37 @@ export default function Dialog({
                             ">
 
                                 <button
-
+                                    type="button"
                                     onClick={onClose}
-
                                     className="
-                                        bg-zinc-700
-                                        hover:bg-zinc-600
-                                        transition-all
-                                        rounded-xl
-                                        pt-2
-                                        pb-1
-                                        font-bebas
-                                        text-2xl
-                                    "
+                                    bg-zinc-700
+                                    hover:bg-zinc-600
+                                    transition-all
+                                    rounded-xl
+                                    pt-2
+                                    pb-1
+                                    font-bebas
+                                    text-2xl
+                                "
                                 >
                                     {cancelText}
                                 </button>
 
                                 <button
-
+                                    type="button"
                                     onClick={onConfirm}
-
                                     disabled={loading}
-
                                     className="
-                                        bg-red-600
-                                        hover:bg-red-500
-                                        transition-all
-                                        rounded-xl
-                                        pt-2
-                                        pb-1
-                                        font-bebas
-                                        text-2xl
-                                        disabled:opacity-50
-                                    "
+                                    bg-red-600
+                                    hover:bg-red-500
+                                    transition-all
+                                    rounded-xl
+                                    pt-2
+                                    pb-1
+                                    font-bebas
+                                    text-2xl
+                                    disabled:opacity-50
+                                "
                                 >
                                     {
                                         loading
