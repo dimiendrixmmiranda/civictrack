@@ -25,7 +25,7 @@ export default function TabelaDeProblemas({ denuncias, qtdeDeLinhas, altura }: T
                         </p>
                     </Link>
                 </div>
-                <div className={`overflow-x-auto ${altura} barraTabela flex flex-col justify-center items-center`}>
+                <div className={`overflow-x-auto ${altura} barraTabela flex flex-col justify-center items-center overflow-y-hidden`}>
                     {
                         denuncias.length > 0 ? (
                             <div className="flex flex-col w-full h-full mb-auto">
