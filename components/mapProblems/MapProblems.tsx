@@ -10,6 +10,7 @@ import {
 } from "react-leaflet"
 
 import "leaflet/dist/leaflet.css"
+import Image from "next/image"
 
 type MapProblem = {
 
@@ -62,7 +63,6 @@ export default function MapProblems({
     }
 
     return (
-
         <MapContainer
             center={[-23.4981, -49.9240]}
             zoom={13}
@@ -71,51 +71,36 @@ export default function MapProblems({
                 height: '300px'
             }}
         >
-
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-
             {
-                problemas.map((problema) => (
-
-                    <Marker
-                        key={problema.id}
-
-                        position={[
-                            problema.endereco.latitude,
-                            problema.endereco.longitude
-                        ]}
-
-                        icon={getIconByRisk(problema.risco)}
-                    >
-
-                        <Popup>
-
-                            <div className="text-black">
-
-                                <h2 className="font-bold">
-                                    {problema.tipoDoProblema}
-                                </h2>
-
-                                <p>
-                                    Categoria:
-                                    {" "}
-                                    {problema.categoria}
-                                </p>
-
-                                <p>
-                                    Risco:
-                                    {" "}
-                                    {problema.risco}
-                                </p>
-
-                            </div>
-
-                        </Popup>
-
-                    </Marker>
-                ))
+                problemas.map((problema => {
+                    console.log(problema)
+                    return (
+                        <Marker
+                            key={problema.id}
+                            position={[
+                                problema.endereco.latitude,
+                                problema.endereco.longitude
+                            ]}
+                            icon={getIconByRisk(problema.risco)}
+                        >
+                            <Popup>
+                                <div className="text-black flex flex-col gap-2">
+                                    <h2 className="font-bold">
+                                        {problema.tipoDoProblema}
+                                    </h2>
+                                    <div className="relative w-full h-20 border border-lg rounded-xl">
+                                        {/* <Image alt={problema.tipoDoProblema} src={problema.}/> */}
+                                    </div>
+                                    <p className="m-0!">Categoria: {problema.categoria}</p>
+                                    <p className="m-0!">Risco: {problema.risco ? problema.risco : 'Não definido'}</p>
+                                </div>
+                            </Popup>
+                        </Marker>
+                    )
+                }))
             }
 
         </MapContainer>
