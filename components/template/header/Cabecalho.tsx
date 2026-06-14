@@ -13,9 +13,7 @@ import { RiLoginBoxFill } from "react-icons/ri";
 import { TbInfoHexagonFilled } from "react-icons/tb";
 
 export default function Cabecalho() {
-
     const { user } = useUser()
-
     const pathname = usePathname()
 
     return (
@@ -240,6 +238,7 @@ export default function Cabecalho() {
                             >
                                 <Link
                                     href={'/login'}
+                                    onClick={() => sessionStorage.setItem('formAtivo', 'login')}
                                     className="flex items-center gap-1"
                                 >
                                     <div>
@@ -266,6 +265,7 @@ export default function Cabecalho() {
                                 <Link
                                     href={'/login'}
                                     className="flex items-center gap-1"
+                                    onClick={() => sessionStorage.setItem('formAtivo', 'cadastro')}
                                 >
                                     <div>
                                         <RiLoginBoxFill />

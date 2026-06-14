@@ -1,7 +1,7 @@
 'use client'
 
 import Template from "@/components/template/Template";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import dynamic from "next/dynamic"
 import InputSenha from "@/components/inputSenha/InputSenha";
@@ -13,6 +13,7 @@ import { IoLogIn, IoShieldCheckmarkOutline, IoShieldCheckmarkSharp } from "react
 import { LuLeaf } from "react-icons/lu";
 import { HiUserGroup } from "react-icons/hi";
 import { ImStatsBars } from "react-icons/im";
+import { useSearchParams } from "next/navigation";
 
 const MapSelector = dynamic(
     () => import("@/components/mapSelector/MapSelector"),
@@ -21,7 +22,18 @@ const MapSelector = dynamic(
     }
 )
 export default function Page() {
-    const [formAtivo, setFormAtivo] = useState<'login' | 'cadastro'>('cadastro')
+    const [formAtivo, setFormAtivo] = useState<'login' | 'cadastro'>('login');
+
+    useEffect(() => {
+        const form = sessionStorage.getItem('formAtivo');
+
+        if (form === 'cadastro') {
+            setFormAtivo('cadastro');
+        } else {
+            setFormAtivo('login');
+        }
+    }, [])
+    // const [formAtivo, setFormAtivo] = useState<'login' | 'cadastro'>('cadastro')
 
     const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
